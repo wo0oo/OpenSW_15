@@ -1,5 +1,6 @@
 # OSS PROJECT (TEAM 15) 
-![프로젝트_사진](https://github.com/wo0oo/OpenSW_15/assets/117130749/3209f425-299d-494e-989f-a7792a3ba8ee)
+![Project_image](https://github.com/wo0oo/OpenSW_15/assets/117130749/f3b86cac-cae3-47be-b5d3-743187f32252)
+
 
 
 ## Title
