@@ -2,6 +2,7 @@
 
 ## Title
 아르바이트 근태 관리 사이트
+<br />
 ![팀플_사진](https://github.com/wo0oo/OpenSW_15/assets/117130749/4c394a12-e1a3-4500-8703-f76a50db146c)
 
 ## Abstract
