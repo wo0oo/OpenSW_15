@@ -1,9 +1,8 @@
 # OSS PROJECT 15조
+![팀플_사진](https://github.com/wo0oo/OpenSW_15/assets/117130749/4c394a12-e1a3-4500-8703-f76a50db146c)
 
 ## Title
 아르바이트 근태 관리 사이트
-<br />
-![팀플_사진](https://github.com/wo0oo/OpenSW_15/assets/117130749/4c394a12-e1a3-4500-8703-f76a50db146c)
 
 ## Abstract
 * 아르바이트 출/퇴근 시간을 정확하게 입력하여 그에 따른 근무 시간을 정확하게 기록한다.
