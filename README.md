@@ -1,4 +1,4 @@
-# OSS PROJECT 15조
+# OSS PROJECT (TEAM 15) 
 ![팀플_사진](https://github.com/wo0oo/OpenSW_15/assets/117130749/4c394a12-e1a3-4500-8703-f76a50db146c)
 
 ## Title
