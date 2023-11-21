@@ -1,5 +1,8 @@
 # OSS_Project TEAM15
 Title: 아르바이트 근태 관리 사이트
+![Project_image](https://github.com/wo0oo/OpenSW_15/assets/117130749/1458f927-7d15-44d2-9b76-94f42b48bbb1)
+
+
 ## Abstract
 * 사업장 내 데스크톱 또는 태블릿 등에서 웹 접속 후 사장 로그인 -> 직원의 출/퇴근 시간 등록은 사업장 내에서만 가능 
 * 사장이 직원 추가(직원의 ID 등록) -> 직원이 출근하거나 퇴근할 때 ID를 입력하여 출/퇴근 등록
