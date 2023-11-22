@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "fullcalendar": "^6.1.9"
+  }
+}
