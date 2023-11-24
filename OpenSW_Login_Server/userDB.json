@@ -2,43 +2,21 @@
   "users": [
     {
       "id": 1,
-      "employId": "1234",
+      "employId": "2018202065",
       "password": "1234",
-      "username": "홍길동",
-      "phoneNumber": "010-1111-2222",
-      "email": "test@gmail.com",
-      "birthday": "1985-02-05",
+      "username": "박철준",
+      "phoneNumber": "010-9897-1424",
+      "birthday": "1999-07-13",
       "adminkey": 1
     },
     {
       "id": 2,
-      "employId": "4321",
+      "employId": "2018202086",
       "password": "1234",
-      "username": "김길동",
-      "phoneNumber": "010-1111-2222",
-      "email": "test2@gmail.com",
-      "birthday": "1985-02-05",
-      "adminkey": 0
-    },
-    {
-      "id": 3,
-      "employId": "12345",
-      "password": "12345",
-      "username": "이길동",
-      "phoneNumber": "010-1111-1111",
-      "email": "kw@gmail.com",
-      "birthday": "2023-01-17",
-      "adminkey": 1
-    },
-    {
-      "id": 4,
-      "employId": "2018202000",
-      "password": "12345",
-      "username": "김광운",
+      "username": "이상평",
       "phoneNumber": "010-9999-9999",
-      "email": "kw@kw.ac.kr",
-      "birthday": "1999-07-13",
-      "adminkey": 1
+      "birthday": "1998-08-22",
+      "adminkey": 0
     }
   ]
 }

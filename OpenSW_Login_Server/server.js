@@ -56,7 +56,6 @@ function findhittingdata_for_modify({
   employId,
   username,
   phoneNumber,
-  email,
   birthday,
 }) {
   userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
@@ -65,7 +64,6 @@ function findhittingdata_for_modify({
       user.employId === employId &&
       user.username === username &&
       user.phoneNumber === phoneNumber &&
-      user.email === email &&
       user.birthday === birthday
   );
   return finduser;
@@ -76,7 +74,6 @@ function findhittingdata_for_find({
   employId,
   username,
   phoneNumber,
-  email,
   birthday,
 }) {
   userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
@@ -85,7 +82,6 @@ function findhittingdata_for_find({
       user.employId === employId &&
       user.username === username &&
       user.phoneNumber === phoneNumber &&
-      user.email === email &&
       user.birthday === birthday
   );
   return finduser;
@@ -119,7 +115,7 @@ function isAuthenticated_for_login_modify({ employId, password }) {
 server.post("/auth/register", (req, res) => {
   console.log("register endpoint called; request body:");
   console.log(req.body);
-  var { employId, password, username, phoneNumber, email, birthday, adminkey } =
+  var { employId, password, username, phoneNumber, birthday, adminkey } =
     req.body;
 
   if (
@@ -128,11 +124,11 @@ server.post("/auth/register", (req, res) => {
     password === "" ||
     username === "" ||
     phoneNumber === "" ||
-    email == "" ||
     birthday === ""
   ) {
     const status = 401;
     const message = "Incorrect data";
+
     res.status(status).json({ status, message });
     return;
   }
@@ -149,6 +145,7 @@ server.post("/auth/register", (req, res) => {
     const status = 401;
     const message = "employId already exist";
     res.status(status).json({ status, message });
+    console.log(res);
     return;
   }
 
@@ -157,6 +154,7 @@ server.post("/auth/register", (req, res) => {
       const status = 401;
       const message = err;
       res.status(status).json({ status, message });
+
       return;
     }
 
@@ -179,7 +177,6 @@ server.post("/auth/register", (req, res) => {
       password: password,
       username: username,
       phoneNumber: phoneNumber,
-      email: email,
       birthday: birthday,
       adminkey: adminkey,
     });
@@ -194,6 +191,7 @@ server.post("/auth/register", (req, res) => {
           const status = 401;
           const message = err;
           res.status(status).json({ status, message });
+
           return;
         }
       }
@@ -221,11 +219,11 @@ server.post("/auth/login", (req, res) => {
   }
 
   const adminkey = adminkeyinitinlogin({ employId, password }); //관리자키 확인
-  const username = findhittingdata_login({ employId, password });
+  const userinform = findhittingdata({ employId });
   // Create token for new user
   const access_token = createToken({ employId, password, adminkey }); //토큰 만들기
   const message = "Success login";
-  res.status(200).json({ message, access_token, username }); //토큰 전송
+  res.status(200).json({ message, access_token, userinform }); //토큰 전송
 });
 
 //비밀번호 재확인 api MY페이지 접속을 위한 미들웨어
@@ -341,11 +339,9 @@ server.post("/auth/modify", (req, res) => {
     password,
     username,
     phoneNumber,
-    email,
     birthday,
     newPassword,
     newPhoneNumber,
-    newEmail,
   } = req.body;
 
   if (isAuthenticated_for_login_modify({ employId, password }) === false) {
@@ -387,7 +383,6 @@ server.post("/auth/modify", (req, res) => {
     employId,
     username,
     phoneNumber,
-    email,
     birthday,
   });
 
@@ -419,9 +414,6 @@ server.post("/auth/modify", (req, res) => {
     if (newPhoneNumber !== "") {
       data.users[find_user_index].phoneNumber = newPhoneNumber;
     }
-    if (newEmail !== "") {
-      data.users[find_user_index].email = newEmail;
-    }
 
     //add some data
     var writeData = fs.writeFileSync(
@@ -448,14 +440,13 @@ server.post("/auth/modify", (req, res) => {
 server.post("/auth/find", (req, res) => {
   console.log("check endpoint called; request body:");
   console.log(req.body);
-  const { employId, username, phoneNumber, email, birthday } = req.body;
+  const { employId, username, phoneNumber, birthday } = req.body;
 
   const hittingdata = findhittingdata_for_find({
     //DB에 해당 정보를 매칭시키고 원하는 정보를 가져옴
     employId,
     username,
     phoneNumber,
-    email,
     birthday,
   });
 
@@ -464,7 +455,6 @@ server.post("/auth/find", (req, res) => {
     employId === "" ||
     username === "" ||
     phoneNumber === "" ||
-    email == "" ||
     birthday === ""
   ) {
     const status = 401;
