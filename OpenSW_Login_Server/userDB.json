@@ -8,15 +8,6 @@
       "phoneNumber": "010-9897-1424",
       "birthday": "1999-07-13",
       "adminkey": 1
-    },
-    {
-      "id": 2,
-      "employId": "2018202086",
-      "password": "1234",
-      "username": "이상평",
-      "phoneNumber": "010-9999-9999",
-      "birthday": "1998-08-22",
-      "adminkey": 0
     }
   ]
 }
