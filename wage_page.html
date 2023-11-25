@@ -420,7 +420,7 @@
                     else { //근무는 안 했지만 토요일에 주휴 발생하는 상황 -> 주휴수당은 표시 해줘야함
                         if (Holiday_wage !== 0) {
                             nowColumn.style.backgroundColor = "#A9F5D0";
-                            nowColumn.innerText = leftPad(nowDay.getDate()) + "\n" + (Math.floor(Holiday_wage)).toString() + "원";      //  주휴수당 입력
+                            nowColumn.innerText = leftPad(nowDay.getDate()) + "\n\n" + (Math.floor(Holiday_wage)).toString() + "원";      //  주휴수당 입력
                         }
                     }
                 }
