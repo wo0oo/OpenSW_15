@@ -1,1 +1,13 @@
-{"users":[{"id":1,"employId":"2018202065","password":"1234","username":"박철준","phoneNumber":"010-9897-1424","birthday":"1999-07-13","adminkey":1}]}
+{
+  "users": [
+    {
+      "id": 1,
+      "employId": "2018202065",
+      "password": "1234",
+      "username": "박철준",
+      "phoneNumber": "7777-7777-7777",
+      "birthday": "7777-07-17",
+      "adminkey": 1
+    }
+  ]
+}
