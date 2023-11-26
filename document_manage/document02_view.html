@@ -1,5 +1,6 @@
 <!doctype html>
 <link rel="stylesheet" href="top_bar.css">
+<link rel="stylesheet" href="document02_view.css">
 
 <html lang="en">
   <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
@@ -27,13 +28,48 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>근로 계약서 확인</title>
+    <title>급여 명세서 확인</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   </head>
   <body>
-    <label for="upload"> 파일 업로드</label>
-    <input type="file" id="upload" name="upload"/>
+    <div class="board_wrap">
+        <div class="board_view_wrap">
+            <div class="board_view">
+                <div class="title">
+                    11월 급여 명세서
+                </div>
+                <div class="info">
+                    <dl>
+                        <dt>No.</dt>
+                        <dd>1</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성자</dt>
+                        <dd>admin</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성일</dt>
+                        <dd>2023-11-26</dd>
+                    </dl>
+                </div>
+                <li class="nav-item dropdown"><h6>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       파일</a>
+                      <ul class="dropdown-menu">
+                        <a href="급여명세서.pdf" download>11월 급여 명세서</a>
+                      </ul></h6>
+                    </li>
+                <div class="cont">
+                    11월 급여 명세서
+                </div>
+            </div>
+            <div class="bt_wrap">
+                <a href="document02.html" class="on">목록</a>
+                <a href="edit.html">수정</a>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
