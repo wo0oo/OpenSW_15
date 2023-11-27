@@ -1,0 +1,171 @@
+<link rel="stylesheet" href="top_bar.css">
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+    <title>OSS_15</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+</head>
+
+<!-- 상단바 -->
+<header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+    <div class="menu">
+        <nav class="clearfix">
+            <ul class="clearfix">
+                <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
+                <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+                <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
+                <li><a href="schedule.html"><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+                <li><a href=""><i class="bi bi-file-earmark-text"></i> 서류 확인</a></li>
+            </ul>
+            <a id="pull" href="#"></a>
+        </nav>
+    </div>
+</header>
+
+
+
+<body>
+    <style>
+        .schedulebox {
+            width: 100px;
+            margin: 2em auto;
+            padding: 2em;
+            border-top: solid 5px #FF8000;
+            background-color: #F9F4E8;
+            box-shadow: 3px 1px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        td {
+            width: 70px;
+            height: 70px;
+        }
+
+        .Calendar {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .Calendar>thead>tr:first-child>td {
+            font-weight: bold;
+        }
+
+        .Calendar>thead>tr:last-child>td {
+            background-color: gray;
+            color: white;
+        }
+
+
+
+        .today {
+            background-color: #FFCA64;
+            cursor: pointer;
+        }
+
+
+        .futureDay.choiceDay,
+        .today.choiceDay {
+            background-color: #3E85EF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        div.left {
+            float: left;
+            margin-left: 10px;
+            margin-top: 50px;
+        }
+
+        div.right {
+            position: absolute;
+            margin-right: 10px;
+            margin-top: 50px;
+            right: 100px;
+        }
+
+        .date:hover {
+            background-color: red;
+        }
+    </style>
+    <table class="Calendar">
+        <thead>
+            <tr>
+                <td colspan="7">
+                    <span id="calYear"></span>년
+                    <span id="calMonth"></span>월
+                    <span id="sumWage"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>일</td>
+                <td>월</td>
+                <td>화</td>
+                <td>수</td>
+                <td>목</td>
+                <td>금</td>
+                <td>토</td>
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        function leftPad(value) {
+            if (value < 10) {
+                value = "0" + value;
+                return value;
+            }
+            return value;
+        }
+        let month = new Date();
+        let firstDate = new Date(month.getFullYear(), month.getMonth(), 1);     // 이번달 1일
+        let lastDate = new Date(month.getFullYear(), month.getMonth() + 1, 0);  // 이번달 마지막날
+        let tbody_Calendar = document.querySelector(".Calendar > tbody");
+        document.getElementById("calYear").innerText = month.getFullYear();             // 연도 숫자 갱신
+        document.getElementById("calMonth").innerText = leftPad(month.getMonth() + 1);  // 월 숫자 갱신
+
+
+        while (tbody_Calendar.rows.length > 0) {                        // 이전 출력결과가 남아있는 경우 초기화
+            tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
+        }
+
+        let nowRow = tbody_Calendar.insertRow();        // 첫번째 행 추가          
+
+        for (let j = 0; j < firstDate.getDay(); j++) {  // 이번달 1일의 요일만큼
+            let nowColumn = nowRow.insertCell();        // 열 추가
+        }
+
+        for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {   // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복  
+
+
+
+
+            let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
+            nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
+
+
+            if (nowDay.getDay() == 0) {                 // 일요일인 경우 글자색 빨강으로
+                nowColumn.style.color = "#DC143C";
+            }
+            if (nowDay.getDay() == 6) {                 // 토요일인 경우 글자색 파랑으로 하고
+                nowColumn.style.color = "#0000CD";
+                nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
+            }
+            nowColumn.className = "date";
+        }
+
+
+
+    </script>
+
+
+</body>
