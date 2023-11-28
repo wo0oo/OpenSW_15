@@ -48,7 +48,7 @@
   </body>
 </html>
 
-<form method="post" action="upload" enctype="multipart/form-data" id="file_up">
+<form method="post" action="upload" enctype="multipart/form-data" id="file_up" style="display:none">
   <div>
   <label for="up"> 근로 계약서 업로드 : </label>
     <input type="file" id="up" name="up"/>
@@ -61,9 +61,10 @@
 </form>
 
 <script>
+  const manager = true;
   function myFunc(){
-    if(1){
-      document.getElementById("file_up");
+    if(manager==true){
+      document.getElementById("file_up").style.display="block";
     }
     document.getElementById("file_down");
   }
