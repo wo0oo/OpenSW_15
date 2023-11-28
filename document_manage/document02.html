@@ -1,7 +1,12 @@
 <!doctype html>
 <link rel="stylesheet" href="top_bar.css">
-<link rel="stylesheet" href="document02.css">
 
+<style>
+  #y2023{
+    font-size: 20px;
+    display: flex;
+  }
+</style>
 <html lang="en">
   <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
     <div class="menu">
@@ -33,36 +38,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   </head>
   <body>
-    <div class="board_wrap">
-      <div class="board_title">
-        <h1 align="center">1</h1>
-      </div>
-      <div class="board_list">
-        <div class="top">
-          <div class="num">No.</div>
-          <div class="title">제목</div>
-          <div class="write">작성자</div>
-          <div class="date">작성일</div>
-        </div>
-        <div>
-          <div class="num">1</div>
-          <div class="title"><a href="document02_view.html">11월 급여 명세서</a></div>
-          <div class="write">Admin</div>
-          <div class="date">2023-11-26</div>
-        </div>
-        <div class="board_page">
-          <a href="#" class="btn_first"><i class="bi bi-chevron-bar-left"></i></a>
-          <a href="#" class="btn_prev"><i class="bi bi-chevron-compact-left"></i></a>
-          <a href="#" class="num">1</a>
-          <a href="#" class="btn_next"><i class="bi bi-chevron-compact-right"></i></a>
-          <a href="#" class="btn_last"><i class="bi bi-chevron-bar-right"></i></a>
-        </div>
-        <div class="bt_wrap">
-          <a href="list.html" class="on">업로드</a>
-          <a href="edit.html">수정</a>
-        </div>
-      </div>
-    </div>
+    <li class="nav-item dropdown" id="y2023">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">2023</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="document01.html">1월</a></li>
+          <li><a class="dropdown-item" href="document02.html">2월</a></li>
+          <li><a class="dropdown-item" href="document01.html">3월</a></li>
+          <li><a class="dropdown-item" href="document02.html">4월</a></li>
+          <li><a class="dropdown-item" href="document01.html">5월</a></li>
+          <li><a class="dropdown-item" href="document02.html">6월</a></li>
+          <li><a class="dropdown-item" href="document01.html">7월</a></li>
+          <li><a class="dropdown-item" href="document02.html">8월</a></li>
+          <li><a class="dropdown-item" href="document01.html">9월</a></li>
+          <li><a class="dropdown-item" href="document02.html">10월</a></li>
+          <li><a class="dropdown-item" href="document01.html">11월</a></li>
+          <li><a class="dropdown-item" href="document02.html">12월</a></li>
+        </ul>
+      </li>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>

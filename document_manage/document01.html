@@ -1,5 +1,16 @@
 <!doctype html>
 <link rel="stylesheet" href="top_bar.css">
+<link rel="stylesheet" href="document01.css">
+
+<style>
+  #file_up{
+    text-align:center;
+  }
+
+  #file_down{
+    text-align:center;
+  }
+</style>
 
 <html lang="en">
   <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
@@ -32,8 +43,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   </head>
   <body>
-    <label for="upload"> 파일 업로드</label>
-    <input type="file" id="upload" name="upload"/>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<form method="post" action="upload" enctype="multipart/form-data" id="file_up">
+  <div>
+  <label for="up"> 근로 계약서 업로드 : </label>
+    <input type="file" id="up" name="up"/>
+    </div>
+    <input type="submit">
+</form>
+
+<form id="file_down">
+  <a href="급여명세서.pdf" download>근로 계약서</a>
+</form>
+
+<script>
+  function myFunc(){
+    if(1){
+      document.getElementById("file_up");
+    }
+    document.getElementById("file_down");
+  }
+  
+</script>
