@@ -41,7 +41,8 @@
 ![image](https://github.com/wo0oo/OpenSW_15/assets/128895705/f156955e-2254-4c6b-adba-9d31dcc72e4d)
 
 *출퇴근 등록 페이지
-![image](https://github.com/wo0oo/OpenSW_15/assets/128895705/e3b84163-3598-48f8-a8ee-d0c449eb64e8)
+![image](https://github.com/wo0oo/OpenSW_15/assets/128895705/059aa94a-b27a-4024-a215-31db33494866)
+
 
 
 
