@@ -19,6 +19,23 @@
 * 스케쥴 확인 페이지
 ![schedule_page](https://github.com/wo0oo/OpenSW_15/assets/117130749/67152151-9f3c-4a43-8992-05153294e256)
 
+* 로그인 페이지
+![login_page](https://github.com/wo0oo/OpenSW_15/assets/56952340/af0c603d-4cf2-4cfa-8c43-7be1604e88bc)
+
+* 로그인 모달
+![login_modal](https://github.com/wo0oo/OpenSW_15/assets/56952340/5b8a57c0-13ea-4930-ad22-eeadf934224e)
+
+* 회원가입 모달
+![register_modal](https://github.com/wo0oo/OpenSW_15/assets/56952340/2c24728a-d95d-48b9-9cdc-46a5ca6d94ea)
+
+*비밀번호 찾기 모달
+![find_modal](https://github.com/wo0oo/OpenSW_15/assets/56952340/e704bb58-ddff-450b-90f1-719b70417b91)
+
+*My 페이지
+![my_page](https://github.com/wo0oo/OpenSW_15/assets/56952340/12598f11-a67a-4bf9-80c4-d14de77d3c40)
+
+
+
 
 ## Individual Progress Status
 
@@ -28,9 +45,9 @@
 * 스케쥴 확인 페이지 구현
 
 ### 박철준
-* 
-* 
-* 
+* 로그인,회원가입,비밀번호 찾기 모달 구현
+* 로그인,회원가입,비밀번호 찾기 API 서버 구현
+* MY 페이지 구현 및 개인정보 변경 API 구현 
 
 ### 이홍섭
 * 출/퇴근 등록 구현
