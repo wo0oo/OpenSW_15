@@ -34,6 +34,14 @@
 * My 페이지
 ![my_page](https://github.com/wo0oo/OpenSW_15/assets/56952340/12598f11-a67a-4bf9-80c4-d14de77d3c40)
 
+*서류 확인 페이지 - 근로 계약서
+![image](https://github.com/wo0oo/OpenSW_15/assets/128895705/3cb7a40d-5ac4-4737-bd46-4b20dea852d5)
+
+*서류 확인 페이지 - 급여 명세서
+![image](https://github.com/wo0oo/OpenSW_15/assets/128895705/f156955e-2254-4c6b-adba-9d31dcc72e4d)
+
+*출퇴근 등록 페이지
+![image](https://github.com/wo0oo/OpenSW_15/assets/128895705/e3b84163-3598-48f8-a8ee-d0c449eb64e8)
 
 
 
