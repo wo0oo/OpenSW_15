@@ -9,12 +9,11 @@
 
 ### Project Screenshot
 * 급여 확인 페이지
-
-<img src="./images/wage_page.png">
+![wage_page](https://github.com/wo0oo/OpenSW_15/assets/117130749/da96e897-99c2-479d-91cd-ad1b16338ef9)
 
 * 스케쥴 확인 페이지
+![schedule_page](https://github.com/wo0oo/OpenSW_15/assets/117130749/67152151-9f3c-4a43-8992-05153294e256)
 
-<img src="./images/schedule_page.png">
 
 ## Individual Progress Status
 
