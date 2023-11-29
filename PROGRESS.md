@@ -28,10 +28,10 @@
 * 회원가입 모달
 ![register_modal](https://github.com/wo0oo/OpenSW_15/assets/56952340/2c24728a-d95d-48b9-9cdc-46a5ca6d94ea)
 
-*비밀번호 찾기 모달
+* 비밀번호 찾기 모달
 ![find_modal](https://github.com/wo0oo/OpenSW_15/assets/56952340/e704bb58-ddff-450b-90f1-719b70417b91)
 
-*My 페이지
+* My 페이지
 ![my_page](https://github.com/wo0oo/OpenSW_15/assets/56952340/12598f11-a67a-4bf9-80c4-d14de77d3c40)
 
 
