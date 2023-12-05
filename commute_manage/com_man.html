@@ -1,0 +1,177 @@
+<!doctype html>
+<link rel="stylesheet" href="top_bar.css">
+
+<style>
+  .container{
+    text-align : center;
+    display:flex;
+  }
+  #stop-button{
+    display:none;
+  }
+</style>
+
+<html lang="en">
+  <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+    <div class="menu">
+        <nav class="clearfix">
+            <ul class="clearfix">
+                <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
+                <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+                <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
+                <li><a href=""><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
+                      <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
+                    </ul>
+                  </li>
+            </ul>
+            <a id="pull" href="#"></a>
+        </nav>
+    </div>
+
+</header>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>출퇴근 등록</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <div class="container">
+        <p class="start-time">출근 시간 : 00:00:00</p>
+        <p class="elapsed-time-text">00h 00m 00s</p>
+        <p class="stop-time">퇴근 시간 : 00:00:00</p>
+        <div class="buttons-container">
+            <button type="button" id="start-button" onclick="startStopwatch()">출근</button>
+            <button type="button" id="stop-button" onclick="stopStopwatch()">퇴근</button>
+            <button type="button" id="reset-button" onclick="resetStopwatch()">리셋</button>
+        </div>
+    </div>
+    <script>
+    const startButton = document.getElementById("start-button");
+    const stopButton = document.getElementById("stop-button");
+    const resetButton = document.getElementById("reset-button");
+    const elapsedTimeText = document.getElementsByClassName("elapsed-time-text")[0];
+    const totlaTimetext = document.getElementsByClassName("total-time-text")[0];
+    const stTime = document.getElementsByClassName("start-time")[0];
+    const spTime = document.getElementsByClassName("stop-time")[0];
+    
+    let elapsedTimeIntervalRef;
+    let startTime;
+    let stopTime;
+    let elapsedTimeWhenPaused;
+    
+    function displayStartButton() {
+    startButton.style.display = "block";
+    stopButton.style.display = "none";
+}
+
+function hideStartButton() {
+    startButton.style.display = "none";
+    stopButton.style.display = "block";
+}
+
+    function startStopwatch() {
+        setStartTime();
+        timeST = new Date();
+        stTime.innerText = "출근 시간 : "+timeST.getHours() + ":"+timeST.getMinutes()+":"+timeST.getSeconds();
+    
+        elapsedTimeIntervalRef = setInterval(() => {
+            elapsedTimeText.innerText = timeAndDateHandling.getElapsedTime(startTime);
+        }, 1000);
+
+        hideStartButton();
+    }
+    
+    
+    function setStartTime() {
+        if (elapsedTimeWhenPaused) {
+            startTime = new Date();
+    
+            startTime.setHours(startTime.getHours() - elapsedTimeWhenPaused.hours);
+            startTime.setMinutes(startTime.getMinutes() - elapsedTimeWhenPaused.minutes);
+            startTime.setSeconds(startTime.getSeconds() - elapsedTimeWhenPaused.seconds);
+        } else {
+            startTime = new Date();
+        }
+    }
+    
+    function stopStopwatch() {
+        if (typeof elapsedTimeIntervalRef !== "undefined") {
+            clearInterval(elapsedTimeIntervalRef);
+            elapsedTimeIntervalRef = undefined;
+        }
+        stopTime = new Date();
+        spTime.innerText = "퇴근 시간 : "+stopTime.getHours() + ":"+stopTime.getMinutes()+":"+stopTime.getSeconds();
+        storeElapsedTimeOnPause();
+        displayStartButton();
+    }
+    
+    function storeElapsedTimeOnPause() {
+        const brokenDownElapsedTime = elapsedTimeText.innerText.split(":");
+    
+        const brokenDownElapsedTimeAsNumbers = brokenDownElapsedTime.map(numberAsString => parseInt(numberAsString));
+    
+        elapsedTimeWhenPaused = {
+            hours: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[0] : 0,
+            minutes: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[1] : brokenDownElapsedTimeAsNumbers[0],
+            seconds: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[2] : brokenDownElapsedTimeAsNumbers[1]
+        }
+    }
+    
+    function resetStopwatch() {
+        if (typeof elapsedTimeIntervalRef !== "undefined") {
+            clearInterval(elapsedTimeIntervalRef);
+            elapsedTimeIntervalRef = undefined;
+        }
+    
+        elapsedTimeWhenPaused = undefined
+        displayStartButton();
+
+        elapsedTimeText.innerText = "00h 00m 00s";
+        stTime.innerText = "출근 시간 : 00:00:00";
+        spTime.innerText = "퇴근 시간 : 00:00:00";
+    }
+    
+    const timeAndDateHandling = {
+        getElapsedTime: function (startTime) {
+    
+            let endTime = new Date();
+            
+            let timeDiff = endTime.getTime() - startTime.getTime();
+    
+            timeDiff = timeDiff / 1000;
+    
+            let seconds = Math.floor(timeDiff % 60);
+            let secondsAsString = seconds < 10 ? "0" + seconds : seconds + "";
+    
+            timeDiff = Math.floor(timeDiff / 60);
+    
+            let minutes = timeDiff % 60;
+            let minutesAsString = minutes < 10 ? "0" + minutes : minutes + "";
+    
+            timeDiff = Math.floor(timeDiff / 60);
+    
+            let hours = timeDiff % 24;
+    
+            timeDiff = Math.floor(timeDiff / 24);
+    
+            let days = timeDiff;
+    
+            let totalHours = hours + (days * 24); // add days to hours
+            let totalHoursAsString = totalHours < 10 ? "0" + totalHours : totalHours + "";
+    
+
+            return totalHoursAsString + "h " + minutesAsString + "m " + secondsAsString+"s";
+        }
+    }
+    
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>
