@@ -1,121 +1,183 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
-<script src='./dist/index.global.js'></script>
-<script>
-  function returnDate(){
-    const now  = new Date();
+<!doctype html>
+<link rel="stylesheet" href="top_bar.css">
 
-    let Ycur = now.getFullYear();
-    let Mcur = ("0"+(now.getMonth()+1)).slice(-2);
-    let Dcur = ("0"+(now.getDate())).slice(-2);
-
-    let returnDate = Ycur+"-"+Mcur+"-"+Dcur;
-
-    return returnDate;
-  }
-
-  function returnTime(){
-    const now  = new Date();
-
-    let Ycur = now.getFullYear();
-    let Mcur = ("0"+(now.getMonth()+1)).slice(-2);
-    let Dcur = ("0"+(now.getDate())).slice(-2);
-    let curHour = ("0"+(now.getHours())).slice(-2);
-    let curMinute = ("0"+(now.getMinutes())).slice(-2);
-
-    let returnTime = Ycur+"-"+Mcur+"-"+Dcur+"T"+curHour+":"+curMinute;
-    return returnTime;
-  }
-
-  // returnDate();
-  // returnTime();
-  setInterval(returnDate(), 1000); 
-  setInterval(returnTime(), 1000); 
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      locale:'ko',
-      customButtons: {
-    myClockin: {
-      text: 'Clock In',
-      click: function() {
-        calendar.addEvent({
-          title: "출근",
-          start: returnTime(),
-          end:returnTime(),
-        });
-      }
-    },
-    myClockout: {
-      text: 'Clock out',
-      click: function() {
-        calendar.addEvent({
-            title: "퇴근",
-            start: returnTime(),
-            end:returnTime(),
-          });
-      },
-    }
-  },
-      headerToolbar: {
-        left: 'prevYear,prev,next,nextYear today myClockin myClockout',
-        center: 'title',
-        right: 'dayGridMonth,dayGridWeek,dayGridDay'
-      },
-      navLinks: true, // can click day/week names to navigate views
-      selectable: true,
-      // selectMirror: true,
-      select: function(arg) {
-        var title = prompt('메모 내용');
-        if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
-          })
-        }
-        calendar.unselect()
-      },
-      eventClick: function(arg) {
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
-      },
-      editable: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-       
-      ]
-    });
-
-    calendar.render();
-  });
-
-</script>
 <style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
+  .container{
+    text-align : center;
+    display:table;
   }
 
-  #calendar {
-    max-width: 1100px;
-    margin: 0 auto;
+  #start-time{
+    display:table;
   }
-
 </style>
-</head>
-<body>
 
-  <div id='calendar'></div>
+<html lang="en">
+  <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+    <div class="menu">
+        <nav class="clearfix">
+            <ul class="clearfix">
+                <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
+                <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+                <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
+                <li><a href=""><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
+                      <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
+                    </ul>
+                  </li>
+            </ul>
+            <a id="pull" href="#"></a>
+        </nav>
+    </div>
 
-</body>
+</header>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>출퇴근 등록</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <div class="container">
+        <p class="start-time" id="start">출근 시간 : 00:00:00</p>
+        <p class="elapsed-time-text" id="due">00h 00m 00s</p>
+        <p class="stop-time" id="stop">퇴근 시간 : 00:00:00<br/></p>
+        <div class="buttons-container">
+            <button type="button" id="start-button" onclick="watchStart()">출근</button>
+            <button type="button" id="stop-button" onclick="watchStop()">퇴근</button>
+            <button type="button" id="reset-button" onclick="watchRst()">리셋</button>
+        </div>
+    </div>
+    <script>
+    const startButton = document.getElementById("start-button");
+    const stopButton = document.getElementById("stop-button");
+    const resetButton = document.getElementById("reset-button");
+    const elapsedTimeText = document.getElementsByClassName("elapsed-time-text")[0];
+    const totlaTimetext = document.getElementsByClassName("total-time-text")[0];
+    const stTime = document.getElementsByClassName("start-time")[0];
+    const spTime = document.getElementsByClassName("stop-time")[0];
+    
+    let elapsedTimeIntervalRef;
+    let startTime;
+    let stopTime;
+    let elapsedTimeWhenPaused;
+    let timeST;
+
+    function watchStart() {
+        setStartTime();
+        timeST = new Date();
+
+        let startHour = timeST.getHours();
+        let startMin = timeST.getMinutes();
+        let startSec = timeST.getSeconds();
+
+        let startHourString = startHour<10?"0"+startHour:startHour;
+        let startMinString = startMin<10?"0"+startMin:startMin;
+        let startSecString = startSec<10?"0"+startSec:startSec;
+
+        stTime.innerText = "출근 시간 : "+startHourString + ":"+startMinString+":"+startSecString;
+    
+        elapsedTimeIntervalRef = setInterval(() => {
+            elapsedTimeText.innerText = timeAndDateHandling.getElapsedTime(startTime);
+        }, 1000);
+    }
+    
+    
+    function setStartTime() {
+        if (elapsedTimeWhenPaused) {
+            startTime = new Date();
+    
+            startTime.setHours(startTime.getHours() - elapsedTimeWhenPaused.hours);
+            startTime.setMinutes(startTime.getMinutes() - elapsedTimeWhenPaused.minutes);
+            startTime.setSeconds(startTime.getSeconds() - elapsedTimeWhenPaused.seconds);
+        } else {
+            startTime = new Date();
+        }
+    }
+    
+    function watchStop() {
+        if (typeof elapsedTimeIntervalRef !== "undefined") {
+            clearInterval(elapsedTimeIntervalRef);
+            elapsedTimeIntervalRef = undefined;
+        }
+        stopTime = new Date();
+
+        let stopHour = stopTime.getHours();
+        let stopMin = stopTime.getMinutes();
+        let stopSec = stopTime.getSeconds();
+
+        let stopHourString = stopHour<10?"0"+stopHour:stopHour;
+        let stopMinString = stopMin<10?"0"+stopMin:stopMin;
+        let stopSecString = stopSec<10?"0"+stopSec:stopSec;
+
+        spTime.innerText = "퇴근 시간 : "+stopHourString + ":"+stopMinString+":"+stopSecString;
+        storeElapsedTimeOnPause();
+    }
+    
+    function storeElapsedTimeOnPause() {
+        const brokenDownElapsedTime = elapsedTimeText.innerText.split(":");
+    
+        const brokenDownElapsedTimeAsNumbers = brokenDownElapsedTime.map(numberAsString => parseInt(numberAsString));
+    
+        elapsedTimeWhenPaused = {
+            hours: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[0] : 0,
+            minutes: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[1] : brokenDownElapsedTimeAsNumbers[0],
+            seconds: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[2] : brokenDownElapsedTimeAsNumbers[1]
+        }
+    }
+    
+    function watchRst() {
+        if (typeof elapsedTimeIntervalRef !== "undefined") {
+            clearInterval(elapsedTimeIntervalRef);
+            elapsedTimeIntervalRef = undefined;
+        }
+    
+        elapsedTimeWhenPaused = undefined
+
+        elapsedTimeText.innerText = "00h 00m 00s";
+        stTime.innerText = "출근 시간 : 00:00:00";
+        spTime.innerText = "퇴근 시간 : 00:00:00";
+    }
+    
+    const timeAndDateHandling = {
+        getElapsedTime: function (startTime) {
+    
+            let endTime = new Date();
+            
+            let timeDiff = endTime.getTime() - startTime.getTime();
+    
+            timeDiff = timeDiff / 1000;
+    
+            let seconds = Math.floor(timeDiff % 60);
+            let secondsAsString = seconds < 10 ? "0" + seconds : seconds + "";
+    
+            timeDiff = Math.floor(timeDiff / 60);
+    
+            let minutes = timeDiff % 60;
+            let minutesAsString = minutes < 10 ? "0" + minutes : minutes + "";
+    
+            timeDiff = Math.floor(timeDiff / 60);
+    
+            let hours = timeDiff % 24;
+    
+            timeDiff = Math.floor(timeDiff / 24);
+    
+            let days = timeDiff;
+    
+            let totalHours = hours + (days * 24); // add days to hours
+            let totalHoursAsString = totalHours < 10 ? "0" + totalHours : totalHours + "";
+    
+
+            return totalHoursAsString + "h " + minutesAsString + "m " + secondsAsString+"s";
+        }
+    }
+    
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
 </html>
