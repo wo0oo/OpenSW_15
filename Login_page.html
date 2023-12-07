@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OSS_15</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+</head>
+
+<body>
+  <!--상단바-->
+  <nav class="navbar bg-body-tertiary">
+    <div class="container" style="width: 640px">
+      <span class="navbar-brand mb-0 h1">
+        <i class="bi bi-database"></i>
+        OSS PROJECT (TEAM 15)
+      </span>
+    </div>
+  </nav>
+
+  <!--본문-->
+
+  <div class="d-flex justify-content-center align-items-center flex-column w-100 my-5" style="gap: 1.5rem">
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <div class="fw-bold" style="font-size: 22px">
+        아르바이트 근태 관리 서비스
+      </div>
+
+      <div class="fw-bold">계속하시려면 로그인이 필요합니다.</div>
+    </div>
+
+    <button id="loginModalButton" class="btn btn-primary text-white rounded shadow fw-bold" style="
+          width: 200px;
+          height: 100px;
+          border-color: #ff8000;
+          background-color: #ff8000;
+          font-size: 40px;
+        ">
+      로그인
+    </button>
+    <img src="./광운대로고.jpg" alt="광운대로고" style="width: 300px; height: 100px; overflow: hidden" />
+  </div>
+
+  <div id="loginModal" class="hidden">
+    <div id="modalContent">
+      <div class="fw-bold text-center" style="font-size: 55px">로그인</div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex justify-content-between mt-5">
+          <div class="w-25 ms-3 fw-bold">아이디</div>
+          <input id="userIdInput_login" class="w-75 border border-dark me-3 fw-bold" type="text"
+            placeholder="아이디를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">비밀번호</div>
+          <input id="passwordInput_login" class="w-75 border border-dark me-3 fw-bold" type="password"
+            placeholder="비밀번호를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3 mb-3">
+          <button id="registerModalButton" class="btn btn-primary text-white rounded shadow fw-bold">
+            회원가입
+          </button>
+          <button class="btn btn-primary text-white rounded shadow fw-bold" id="findModalButton">
+            비밀번호 찾기
+          </button>
+        </div>
+        <div class="d-flex justify-content-center flex-column mt-2 mb-4">
+          <div class="text-red-600 text-center text-[15px] mb-[10px]"></div>
+
+          <button class="btn btn-primary text-center mb-3 fw-bold" id="loginButton">
+            LOGIN
+          </button>
+          <button class="btn btn-primary text-center fw-bold" id="modalCloseButton">
+            닫기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="registerModal" class="hidden">
+    <div id="modalContent">
+      <div class="fw-bold text-center" style="font-size: 55px">회원가입</div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex justify-content-between mt-5">
+          <div class="w-25 ms-3 fw-bold">아이디</div>
+          <input id="userIdInput_register" class="w-75 border border-dark me-3 fw-bold" type="text"
+            placeholder="아이디를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">비밀번호</div>
+          <input id="passwordInput_register" class="w-75 border border-dark me-3 fw-bold" type="password"
+            placeholder="비밀번호를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">이름</div>
+          <input id="userNameInput_register" class="w-75 border border-dark me-3 fw-bold" type="text"
+            placeholder="이름을 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">휴대폰</div>
+          <input id="phoneNumberInput_register" class="w-75 border border-dark me-3 fw-bold" type="tel"
+            placeholder="전화번호를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">생년월일</div>
+          <input id="birthDayInput_register" class="w-75 border border-dark me-3 fw-bold" type="date"
+            placeholder="생년월일을 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">관리자권한</div>
+          <input id="adminKeyInput_register" class="w-75 border border-dark me-3 fw-bold" type="number"
+            placeholder="관리자 권한을 원하시면 인증키를 입력하세요." />
+        </div>
+
+        <div class="d-flex justify-content-center flex-column mt-4 mb-4">
+          <div class="text-red-600 text-center text-[15px] mb-[10px]"></div>
+
+          <button class="btn btn-primary text-center mb-3 fw-bold" id="registerButton">
+            REGISTER
+          </button>
+          <button class="btn btn-primary text-center fw-bold" id="modalBackButton_fromRegister">
+            돌아가기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="findModal" class="hidden">
+    <div id="modalContent">
+      <div class="fw-bold text-center" style="font-size: 55px">
+        비밀번호 찾기
+      </div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex justify-content-between mt-5">
+          <div class="w-25 ms-3 fw-bold">아이디</div>
+          <input id="userIdInput_find" class="w-75 border border-dark me-3 fw-bold" type="text"
+            placeholder="아이디를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">이름</div>
+          <input id="userNameInput_find" class="w-75 border border-dark me-3 fw-bold" type="text"
+            placeholder="이름을 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">휴대폰</div>
+          <input id="phoneNumberInput_find" class="w-75 border border-dark me-3 fw-bold" type="tel"
+            placeholder="전화번호를 입력하세요." />
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">생년월일</div>
+          <input id="birthDayInput_find" class="w-75 border border-dark me-3 fw-bold" type="date"
+            placeholder="생년월일을 입력하세요." />
+        </div>
+
+        <div class="d-flex justify-content-center flex-column mt-4 mb-4">
+          <div class="text-red-600 text-center text-[15px] mb-[10px]"></div>
+
+          <button class="btn btn-primary text-center mb-3 fw-bold" id="findButton">
+            FIND
+          </button>
+          <button class="btn btn-primary text-center fw-bold" id="modalBackButton_fromFind">
+            돌아가기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #loginModal {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #registerModal {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #findModal {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #modalContent {
+      position: absolute;
+      background-color: #ffffff;
+      width: 600px;
+
+      padding: 15px;
+    }
+
+    #loginModal.hidden {
+      display: none;
+    }
+
+    #registerModal.hidden {
+      display: none;
+    }
+
+    #findModal.hidden {
+      display: none;
+    }
+  </style>
+
+  <script>
+    const modalOpenButton = document.getElementById("loginModalButton");
+    const modalCloseButton = document.getElementById("modalCloseButton");
+
+    const loginModal = document.getElementById("loginModal");
+    const registerModal = document.getElementById("registerModal");
+    const findModal = document.getElementById("findModal");
+
+    const registerModalButton = document.getElementById(
+      "registerModalButton"
+    );
+    const modalBackButton_fromRegister = document.getElementById(
+      "modalBackButton_fromRegister"
+    );
+    const findModalButton = document.getElementById("findModalButton");
+    const modalBackButton_fromFind = document.getElementById(
+      "modalBackButton_fromFind"
+    );
+
+    const registerButton = document.getElementById("registerButton");
+    const loginButton = document.getElementById("loginButton");
+    const findButton = document.getElementById("findButton");
+
+    modalOpenButton.addEventListener("click", () => {
+      loginModal.classList.remove("hidden");
+    });
+
+    modalCloseButton.addEventListener("click", () => {
+      loginModal.classList.add("hidden");
+    });
+
+    registerModalButton.addEventListener("click", () => {
+      loginModal.classList.add("hidden");
+      registerModal.classList.remove("hidden");
+    });
+    modalBackButton_fromRegister.addEventListener("click", () => {
+      registerModal.classList.add("hidden");
+      loginModal.classList.remove("hidden");
+    });
+
+    findModalButton.addEventListener("click", () => {
+      loginModal.classList.add("hidden");
+      findModal.classList.remove("hidden");
+    });
+
+    modalBackButton_fromFind.addEventListener("click", () => {
+      findModal.classList.add("hidden");
+      loginModal.classList.remove("hidden");
+    });
+
+    //register 할 떄 user 정보
+    const userId_register = document.getElementById("userIdInput_register");
+    const password_register = document.getElementById(
+      "passwordInput_register"
+    );
+    const userName_register = document.getElementById(
+      "userNameInput_register"
+    );
+    const phoneNumber_register = document.getElementById(
+      "phoneNumberInput_register"
+    );
+    const birthDay_register = document.getElementById(
+      "birthDayInput_register"
+    );
+    const adminKey_register = document.getElementById(
+      "adminKeyInput_register"
+    );
+    ///////////////////////////////////////////////////////
+
+    registerButton.addEventListener("click", () => {
+      console.log(userId_register.value);
+      console.log(password_register.value);
+      console.log(userName_register.value);
+      console.log(phoneNumber_register.value);
+      console.log(birthDay_register.value);
+      console.log(adminKey_register.value);
+      if (
+        userId_register.value === "" ||
+        password_register.value === "" ||
+        userName_register.value === "" ||
+        phoneNumber_register.value === "" ||
+        birthDay_register.value === "" ||
+        adminKey_register.value === ""
+      ) {
+        alert("입력하신 정보를 다시 확인하세요.");
+      } else {
+        fetch("http://localhost:8000/auth/register", {
+          method: "POST", // or 'POST'
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+            // 'Authorization': 'Bearer your-token' (if needed)
+          },
+          body: JSON.stringify({
+            employId: userId_register.value,
+            password: password_register.value,
+            username: userName_register.value,
+            phoneNumber: phoneNumber_register.value,
+            birthday: birthDay_register.value,
+            adminkey: adminKey_register.value,
+            date_arr: [{}],
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              // 2xx 응답 코드일 경우
+              console.log(res.json());
+              userId_register.value = "";
+              password_register.value = "";
+              userName_register.value = "";
+              phoneNumber_register.value = "";
+              birthDay_register.value = "";
+              adminKey_register.value = "";
+              alert("회원가입이 완료되었습니다.");
+              registerModal.classList.add("hidden");
+              loginModal.classList.remove("hidden");
+            } else {
+              // 2xx 응답 코드가 아닐 경우
+              console.log(res.json());
+              alert("입력하신 정보를 다시 확인하세요");
+            }
+          })
+
+          .catch((err) => {
+            console.error("Error:", err.response);
+            alert("서버 에러입니다. Error 정보 : " + err.response);
+          });
+      }
+    });
+
+    const userId_login = document.getElementById("userIdInput_login");
+    const password_login = document.getElementById("passwordInput_login");
+
+    loginButton.addEventListener("click", () => {
+      console.log(userId_login.value);
+      console.log(password_login.value);
+      if (userId_login.value === "" || password_login.value === "") {
+        alert("입력하신 정보를 다시 확인하세요.");
+      } else {
+        fetch("http://localhost:8000/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            employId: userId_login.value,
+            password: password_login.value,
+          }),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              alert("입력하신 정보를 다시 확인하세요");
+              // 에러를 던지지 않고, 다음 then 블록으로 넘어가지 않도록 return합니다.
+              return;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            // res.ok가 거짓일 경우 이 블록은 실행되지 않습니다.
+            if (data) {
+              userId_login.value = "";
+              password_login.value = "";
+              alert("로그인에 성공하였습니다.");
+              // 여기에서 data 객체를 활용합니다.
+              console.log(data); // 전체 데이터 출력
+              sessionStorage.setItem("userId", data.userinform.employId);
+              sessionStorage.setItem("userName", data.userinform.username);
+              sessionStorage.setItem(
+                "phoneNumber",
+                data.userinform.phoneNumber
+              );
+              sessionStorage.setItem("birthDay", data.userinform.birthday);
+              sessionStorage.setItem("adminKey", data.userinform.adminkey);
+              sessionStorage.setItem("date_arr", JSON.stringify(data.userinform.date_arr));
+              sessionStorage.setItem("token", data.access_token);
+              location.href = "main_page.html";
+            }
+          })
+          .catch((err) => {
+            console.error("Error:", err);
+            alert("서버 에러입니다. Error 정보 : " + err);
+          });
+      }
+    });
+
+    const userId_find = document.getElementById("userIdInput_find");
+
+    const userName_find = document.getElementById("userNameInput_find");
+    const phoneNumber_find = document.getElementById("phoneNumberInput_find");
+    const birthDay_find = document.getElementById("birthDayInput_find");
+
+    findButton.addEventListener("click", () => {
+      console.log(userId_find.value);
+      console.log(userName_find.value);
+      console.log(phoneNumber_find.value);
+      console.log(birthDay_find.value);
+      if (
+        userId_find.value === "" ||
+        userName_find.value === "" ||
+        phoneNumber_find.value === "" ||
+        birthDay_find.value === ""
+      ) {
+        alert("입력하신 정보를 다시 확인하세요.");
+      } else {
+        fetch("http://localhost:8000/auth/find", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            employId: userId_find.value,
+            username: userName_find.value,
+            phoneNumber: phoneNumber_find.value,
+            birthday: birthDay_find.value,
+          }),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              alert("입력하신 정보를 다시 확인하세요");
+              // 에러를 던지지 않고, 다음 then 블록으로 넘어가지 않도록 return합니다.
+              return;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            // res.ok가 거짓일 경우 이 블록은 실행되지 않습니다.
+            if (data) {
+              userId_find.value = "";
+              userName_find.value = "";
+              phoneNumber_find.value = "";
+              birthDay_find.value = "";
+              console.log(data); // 전체 데이터 출력
+              alert("비밀번호 : " + data.userPassword.password);
+              findModal.classList.add("hidden");
+              loginModal.classList.remove("hidden");
+            }
+          })
+          .catch((err) => {
+            console.error("Error:", err);
+            alert("서버 에러입니다. Error 정보 : " + err);
+          });
+      }
+    });
+  </script>
+</body>
+
+</html>

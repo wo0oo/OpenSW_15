@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <link rel="stylesheet" href="top_bar.css">
+  <script src='./dist/index.global.js'></script>
+  <script src='./commute.js'></script>
+  <script>
+
+    function returnDate() {
+      const now = new Date();
+
+      let Ycur = now.getFullYear();
+      let Mcur = ("0" + (now.getMonth() + 1)).slice(-2);
+      let Dcur = ("0" + (now.getDate())).slice(-2);
+
+      let returnDate = Ycur + "-" + Mcur + "-" + Dcur;
+
+      return returnDate;
+    }
+
+    function returnTime() {
+      const now = new Date();
+
+      let Ycur = now.getFullYear();
+      let Mcur = ("0" + (now.getMonth() + 1)).slice(-2);
+      let Dcur = ("0" + (now.getDate())).slice(-2);
+      let curHour = ("0" + (now.getHours())).slice(-2);
+      let curMinute = ("0" + (now.getMinutes())).slice(-2);
+      let returnTime = Ycur + "-" + Mcur + "-" + Dcur + "-" + curHour + "-" + curMinute;
+
+      // console.log(returnTime);
+      return returnTime;
+    }
+
+    // returnDate();
+    // returnTime();
+    setInterval(returnDate(), 1000);
+    setInterval(returnTime(), 1000);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      let inTime;
+      let outTime;
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'ko',
+        customButtons: {
+          myClockin: {
+            text: 'Clock In',
+            click: function () {
+              calendar.addEvent({
+                title: "출근",
+                start: returnTime(),
+                end: returnTime(),
+              });
+              inTime = returnTime();
+            }
+          },
+          myClockout: {
+            text: 'Clock out',
+            click: function () {
+              calendar.addEvent({
+                title: "퇴근",
+                start: returnTime(),
+                end: returnTime(),
+              });
+              outTime = returnTime();
+              //   console.log(JSON.parse(sessionStorage.getItem("date_arr")));
+              commute_insert(inTime, outTime, JSON.parse(sessionStorage.getItem("date_arr")));
+            },
+          }
+        },
+        headerToolbar: {
+          left: 'prevYear,prev,next,nextYear today myClockin myClockout',
+          center: 'title',
+          right: 'dayGridMonth,dayGridWeek,dayGridDay'
+        },
+        navLinks: true, // can click day/week names to navigate views
+        selectable: true,
+        // selectMirror: true,
+        select: function (arg) {
+          var title = prompt('메모 내용');
+          if (title) {
+            calendar.addEvent({
+              title: title,
+              start: arg.start,
+              end: arg.end,
+              allDay: arg.allDay
+            })
+          }
+          calendar.unselect()
+        },
+        eventClick: function (arg) {
+          if (confirm('Are you sure you want to delete this event?')) {
+            arg.event.remove()
+          }
+        },
+        editable: true,
+        dayMaxEvents: true, // allow "more" link when too many events
+        events: [
+
+        ]
+      });
+
+      calendar.render();
+    });
+
+  </script>
+  <style>
+    body {
+      margin: 40px 10px;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    #calendar {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<!-- 상단바 -->
+<header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+  <div class="menu">
+    <nav class="clearfix">
+      <ul class="clearfix ">
+        <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
+        <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+        <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
+        <li><a href="commute_manage.html"><i class="bi bi-clipboard"></i> 출퇴근 등록</a></li>
+        <li><a href="schedule.html"><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+        <li><a href=""><i class="bi bi-file-earmark-text"></i> 서류 확인</a></li>
+        <li><a href="my_page.html"><i class="bi bi-tag"></i> My 페이지</a> </li>
+      </ul>
+
+      <a id="pull" href="#"></a>
+    </nav>
+  </div>
+</header>
+
+<body>
+
+  <div id='calendar'></div>
+
+</body>
+
+</html>

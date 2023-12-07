@@ -18,13 +18,17 @@
 <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
     <div class="menu">
         <nav class="clearfix">
-            <ul class="clearfix">
+            <ul class="clearfix ">
                 <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
                 <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
                 <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
+                <li><a href="commute_manage.html"><i class="bi bi-clipboard"></i> 출퇴근 등록</a></li>
+
                 <li><a href="schedule.html"><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
                 <li><a href=""><i class="bi bi-file-earmark-text"></i> 서류 확인</a></li>
+                <li><a href="my_page.html"><i class="bi bi-tag"></i> My 페이지</a> </li>
             </ul>
+
             <a id="pull" href="#"></a>
         </nav>
     </div>
@@ -81,6 +85,19 @@
         .today:hover .jbtext {
             display: block;
         }
+
+        ul.details {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: white;
+        }
+
+        li.detail {
+            list-style-type: disc;
+            display: list-item;
+            background-color: white;
+        }
     </style>
     <table class="Calendar">
         <thead>
@@ -106,6 +123,19 @@
         <tbody>
         </tbody>
     </table>
+    <ul class="details">
+        <li class="detail">
+            <p>이미 지난 날짜는 회색으로 표시됩니다.<br></p>
+        </li>
+        <li class="detail">
+            <p>오늘 날짜는 주황으로 표시됩니다.<br></p>
+        </li>
+        <li class="detail">
+            <p>일정이 있는 날짜는 살구색을 표시됩니다.<br></p>
+        </li>
+    </ul>
+
+
     <script>
         let contract_info = { contract_due: new Date(2024, 0, 15, 0, 0, 0, 0), work_day: [{ 0: "16:00 ~ 23:30" }, { 2: "08:30 ~ 14:30" }, { 6: "12:00 ~ 16:00" }] };
 
