@@ -55,6 +55,11 @@
                 start: returnTime(),
                 end: returnTime(),
               });
+              if (localStorage.getItem("commute_flag") === "1") {
+                alert("이미 출근상태입니다.");
+                return;
+              }
+              localStorage.setItem("commute_flag", "1");
               inTime = returnTime();
             }
           },
@@ -66,6 +71,11 @@
                 start: returnTime(),
                 end: returnTime(),
               });
+              if (localStorage.getItem("commute_flag") !== "1") {
+                alert("아직 출근하지 않았습니다.");
+                return;
+              }
+              localStorage.setItem("commute_flag", "0");
               outTime = returnTime();
               //   console.log(JSON.parse(sessionStorage.getItem("date_arr")));
               commute_insert(inTime, outTime, JSON.parse(sessionStorage.getItem("date_arr")));
