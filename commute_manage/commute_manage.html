@@ -65,7 +65,7 @@
     let elapsedTimeIntervalRef;
     let startTime;
     let stopTime;
-    let elapsedTimeWhenPaused;
+    let elapsedTime;
     let timeST;
 
     function watchStart() {
@@ -89,12 +89,12 @@
     
     
     function setStartTime() {
-        if (elapsedTimeWhenPaused) {
+        if (elapsedTime) {
             startTime = new Date();
     
-            startTime.setHours(startTime.getHours() - elapsedTimeWhenPaused.hours);
-            startTime.setMinutes(startTime.getMinutes() - elapsedTimeWhenPaused.minutes);
-            startTime.setSeconds(startTime.getSeconds() - elapsedTimeWhenPaused.seconds);
+            startTime.setHours(startTime.getHours() - elapsedTime.hours);
+            startTime.setMinutes(startTime.getMinutes() - elapsedTime.minutes);
+            startTime.setSeconds(startTime.getSeconds() - elapsedTime.seconds);
         } else {
             startTime = new Date();
         }
@@ -124,7 +124,7 @@
     
         const brokenDownElapsedTimeAsNumbers = brokenDownElapsedTime.map(numberAsString => parseInt(numberAsString));
     
-        elapsedTimeWhenPaused = {
+        elapsedTime = {
             hours: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[0] : 0,
             minutes: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[1] : brokenDownElapsedTimeAsNumbers[0],
             seconds: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[2] : brokenDownElapsedTimeAsNumbers[1]
@@ -137,7 +137,7 @@
             elapsedTimeIntervalRef = undefined;
         }
     
-        elapsedTimeWhenPaused = undefined
+        elapsedTime = undefined
 
         elapsedTimeText.innerText = "00h 00m 00s";
         stTime.innerText = "출근 시간 : 00:00:00";
