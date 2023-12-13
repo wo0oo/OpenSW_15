@@ -1,0 +1,430 @@
+<link rel="stylesheet" href="top_bar.css" />
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSS_15</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <header
+    topmargin="0"
+    bottommargin="0"
+    leftmargin="0"
+    rightmargin="0"
+    style="background-color: #f6f6f6"
+  >
+    <div class="menu">
+      <nav class="clearfix">
+        <ul class="clearfix">
+          <li>
+            <a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a>
+          </li>
+          <li>
+            <a href="wage_page.html"
+              ><i class="bi bi-cash-coin"></i> 급여 확인</a
+            >
+          </li>
+          <li>
+            <a href="board_page.html"><i class="bi bi-clipboard"></i> 게시판</a>
+          </li>
+          <li>
+            <a href=""><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a>
+          </li>
+          <li>
+            <a href=""><i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+          </li>
+          <li>
+            <a href="my_page.html"><i class="bi bi-tag"></i> My 페이지</a>
+          </li>
+        </ul>
+        <a id="pull" href="#"></a>
+      </nav>
+    </div>
+  </header>
+
+  <body>
+    <div class="container mt-5">
+      <h2 class="fw-bold">게시판</h2>
+      <table class="table">
+        <thead>
+          <tr class="align-middle">
+            <th scope="col">글 번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성 날짜</th>
+            <th scope="col">상세 보기</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 게시글 목록이 여기에 들어갑니다 -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container mt-4 text-end">
+      <button type="button" class="btn btn-success" id="createPostModalButton">
+        글 작성
+      </button>
+    </div>
+
+    <div id="createPostModal" class="hidden">
+      <div id="modalContent">
+        <h2 class="fw-bold">글 작성</h2>
+
+        <div class="mb-3">
+          <label for="postTitle_create" class="form-label fw-bold"
+            >글 제목</label
+          >
+          <input
+            type="text"
+            class="form-control fw-bold"
+            id="postTitle_create"
+            placeholder="제목을 입력하세요"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="postContent_create" class="form-label fw-bold"
+            >글 내용</label
+          >
+          <textarea
+            class="form-control fw-bold"
+            id="postContent_create"
+            rows="16"
+            placeholder="내용을 입력하세요"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="postPassword_create" class="form-label fw-bold"
+            >비밀번호</label
+          >
+          <input
+            type="password_create"
+            class="form-control fw-bold"
+            id="postPassword_create"
+            placeholder="글 수정/삭제용 비밀번호를 입력하세요"
+          />
+        </div>
+        <button class="btn btn-success fw-bold" id="postCreateButton">
+          저장
+        </button>
+        <button id="modalCloseButton" class="btn btn-primary fw-bold">
+          닫기
+        </button>
+      </div>
+    </div>
+
+    <div id="postContentModal" class="hidden">
+      <div id="modalContent">
+        <h2 id="postTitle_content" class="modal-title fw-bold">게시글 제목</h2>
+        <div class="modal-details">
+          <p>
+            <strong>작성자:</strong>
+            <span id="postAuthor_content">작성자 이름</span>
+          </p>
+          <p>
+            <strong>작성 날짜:</strong>
+            <span id="postDate_content">2023-01-01</span>
+          </p>
+        </div>
+        <div id="postContent_content" class="modal-body">
+          게시글 내용이 여기에 표시됩니다.
+        </div>
+        <div class="modal-footer">
+          <div class="password-input">
+            <input
+              type="password"
+              class="form-control"
+              id="postPassword_content"
+              placeholder="비밀번호"
+            />
+          </div>
+          <button type="button" class="btn btn-danger" id="postDeleteButton">
+            삭제
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="modalCloseButton_postContent"
+          >
+            닫기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      #createPostModal {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      #postContentModal {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      #modalContent {
+        position: absolute;
+        background-color: #ffffff;
+        width: 1000px;
+        height: 800px;
+
+        padding: 15px;
+      }
+
+      #createPostModal.hidden {
+        display: none;
+      }
+
+      #postContentModal.hidden {
+        display: none;
+      }
+      .modal-title {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .modal-details p {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
+
+      .modal-body {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20px;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .modal-footer button {
+        margin-left: 10px;
+      }
+    </style>
+
+    <script>
+      fetch("http://localhost:8000/post/all", {
+        method: "POST", // or 'POST'
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+          // 'Authorization': 'Bearer your-token' (if needed)
+        },
+        body: JSON.stringify({}),
+      })
+        .then((res) => {
+          if (!res.ok) {
+            alert("입력하신 정보를 다시 확인하세요");
+            // 에러를 던지지 않고, 다음 then 블록으로 넘어가지 않도록 return합니다.
+            return;
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // res.ok가 거짓일 경우 이 블록은 실행되지 않습니다.
+          if (data) {
+            console.log(data); // 전체 데이터 출력
+            const posts = data.allPost;
+            // tbody 요소를 찾아옵니다.
+            const tbody = document.querySelector("tbody");
+
+            // 게시글 데이터를 통해 테이블 행을 생성합니다.
+            posts.forEach((post) => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+          <th scope="row">${post.id}</th>
+          <td>${post.postTitle}</td>
+          <td>${post.postAuthor}</td>
+          <td>${post.postDate}</td>
+          <td><button type="button" class="btn btn-primary btn-sm" id="postContentModalButton-${post.id}">상세보기</button></td>
+      `;
+              tbody.appendChild(tr);
+              const buttonId = `postContentModalButton-${post.id}`;
+              const button = document.getElementById(buttonId);
+
+              if (button) {
+                button.addEventListener("click", function () {
+                  // 여기에 클릭됐을 때 수행할 로직을 추가합니다.
+                  document.getElementById("postTitle_content").innerText =
+                    post.postTitle;
+                  document.getElementById("postAuthor_content").innerText =
+                    post.postAuthor;
+                  document.getElementById("postDate_content").innerText =
+                    post.postDate;
+                  document.getElementById("postContent_content").innerText =
+                    post.postContent;
+
+                  postContentModal.classList.remove("hidden");
+                  // 예를 들어, 상세 정보를 표시하는 모달 창을 여는 로직 등
+                  console.log(
+                    `게시글 ID ${post.postAuthor}의 상세보기 버튼이 클릭되었습니다.`
+                  );
+                  const modalCloseButton_postContent = document.getElementById(
+                    "modalCloseButton_postContent"
+                  );
+                  modalCloseButton_postContent.addEventListener("click", () => {
+                    postContentModal.classList.add("hidden");
+                  });
+
+                  const postDeleteButton =
+                    document.getElementById("postDeleteButton");
+                  postDeleteButton.addEventListener("click", () => {
+                    if (
+                      postPassword_content.value === post.postPassword ||
+                      sessionStorage.getItem("adminKey") === "1"
+                    ) {
+                      fetch("http://localhost:8000/post/delete", {
+                        method: "POST", // or 'POST'
+                        headers: {
+                          "Content-type": "application/json",
+                          Accept: "application/json",
+                          // 'Authorization': 'Bearer your-token' (if needed)
+                        },
+                        body: JSON.stringify({
+                          id: post.id,
+                          postPassword: post.postPassword,
+                          adminKey: sessionStorage.getItem("adminKey"),
+                        }),
+                      })
+                        .then((res) => {
+                          if (!res.ok) {
+                            alert("입력하신 정보를 다시 확인하세요");
+
+                            return;
+                          }
+                          return res.json();
+                        })
+                        .then((data) => {
+                          // res.ok가 거짓일 경우 이 블록은 실행되지 않습니다.
+                          if (data) {
+                            if (sessionStorage.getItem("adminKey") === "1") {
+                              alert("관리자 권한으로 게시글을 삭제하였습니다.");
+                            } else {
+                              alert("게시글을 삭제하였습니다.");
+                            }
+                            location.href = "board_page.html";
+                          }
+                        })
+                        .catch((err) => {
+                          console.error("Error:", err);
+                          alert("서버 에러입니다. Error 정보 : " + err);
+                        });
+                    } else {
+                      alert("입력하신 정보를 다시 확인하세요.");
+                    }
+                  });
+                });
+              }
+            });
+          }
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+          alert("서버 에러입니다. Error 정보 : " + err);
+        });
+
+      const createPostModalButton = document.getElementById(
+        "createPostModalButton"
+      );
+      const createPostModal = document.getElementById("createPostModal");
+
+      createPostModalButton.addEventListener("click", () => {
+        createPostModal.classList.remove("hidden");
+      });
+
+      const modalCloseButton = document.getElementById("modalCloseButton");
+
+      modalCloseButton.addEventListener("click", () => {
+        createPostModal.classList.add("hidden");
+      });
+
+      const postCreateButton = document.getElementById("postCreateButton");
+
+      const postTitle_create = document.getElementById("postTitle_create");
+      const postContent_create = document.getElementById("postContent_create");
+      const postPassword_create = document.getElementById(
+        "postPassword_create"
+      );
+
+      postCreateButton.addEventListener("click", () => {
+        const postDate_create = new Date().toLocaleString();
+        if (
+          postTitle_create.value === "" ||
+          postContent_create.value === "" ||
+          postPassword_create.value === ""
+        ) {
+          alert("입력하신 정보를 다시 확인하세요.");
+        } else {
+          const postAuthor_create = sessionStorage.getItem("userName");
+          if (postAuthor_create === null) {
+            alert("작성자 정보가 없습니다. 다시 로그인하세요.");
+          } else {
+            fetch("http://localhost:8000/post/create", {
+              method: "POST", // or 'POST'
+              headers: {
+                "Content-type": "application/json",
+                Accept: "application/json",
+                // 'Authorization': 'Bearer your-token' (if needed)
+              },
+              body: JSON.stringify({
+                postTitle: postTitle_create.value,
+                postContent: postContent_create.value,
+                postAuthor: postAuthor_create,
+                postDate: postDate_create,
+                postPassword: postPassword_create.value,
+              }),
+            })
+              .then((res) => {
+                if (res.ok) {
+                  // 2xx 응답 코드일 경우
+
+                  postTitle_create.value = "";
+                  postContent_create.value = "";
+                  postPassword_create.value = "";
+                  alert("글 작성이 완료되었습니다.");
+                  location.href = "board_page.html";
+                } else {
+                  // 2xx 응답 코드가 아닐 경우
+                  console.log(res.json());
+                  alert("입력하신 정보를 다시 확인하세요");
+                }
+              })
+
+              .catch((err) => {
+                console.error("Error:", err);
+                alert("서버 에러입니다. Error 정보 : " + err);
+              });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,13 +1,1 @@
-{
-  "users": [
-    {
-      "id": 1,
-      "employId": "2018202065",
-      "password": "1234",
-      "username": "박철준",
-      "phoneNumber": "7777-7777-7777",
-      "birthday": "7777-07-17",
-      "adminkey": 1
-    }
-  ]
-}
+{"users":[{"id":1,"employId":"2018202065","password":"1234","username":"박철준","phoneNumber":"7777-7777-7777","birthday":"7777-07-17","adminkey":1},{"id":2,"employId":"2018202000","password":"1234","username":"김광운","phoneNumber":"010-9999-9999","birthday":"2222-02-02","adminkey":0}]}
