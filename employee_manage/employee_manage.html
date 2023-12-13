@@ -121,9 +121,9 @@ row{
               <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <td>홍길동</td>
+                  <td>홍길동 </td>
                   <td>qwerasdf</td>
-                  <td>010-1234-5678</td>
+                  <td>010-1111-2222</td>
                   <td>10,000</td>
                   <td><button class="btn btn-primary" data-bs-target="#ToggleFixModal" data-bs-toggle="modal" data-bs-dismiss="modal">수정</button></td>
                 </tr>
@@ -131,7 +131,7 @@ row{
                   <th scope="row">2</th>
                   <td>이홍섭 </td>
                   <td>asdf1234</td>
-                  <td>010-4321-5678</td>
+                  <td>010-1234-5678</td>
                   <td>10,000</td>
                   <td><button class="btn btn-primary" data-bs-target="#ToggleFixModal" data-bs-toggle="modal" data-bs-dismiss="modal">수정</button></td>
                 </tr>
@@ -147,7 +147,7 @@ row{
     </div>
 
     <div class="modal fade" id="ToggleFixModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">직원 정보 수정</h5>
@@ -158,9 +158,40 @@ row{
             <p> <strong>직원 ID</strong><br/> <input type="text" id="employeeID"></p>
             <p> <strong>전화 번호</strong><br/> <input type="text" id="employeeNumber"></p>
             <p> <strong>시급(원)</strong><br/> <input type="text" id="employeeWage"></p>
+            <p> <strong>근무 일정</strong> 
+              <button type="button" class="btn" id="add-btn" onclick="addLine()"><i class="bi bi-plus"></i></button><br/>
+                <div class="row g-2">
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                        <option value="Mon" selected>월요일</option>
+                        <option value="Tue">화요일</option>
+                        <option value="Wed">수요일</option>
+                        <option value="Thu">목요일</option>
+                        <option value="Fri">금요일</option>
+                        <option value="Sat">토요일</option>
+                        <option value="Sun">일요일</option>
+                      </select>
+                      <label for="floatingSelectGrid">근무 요일</label>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" placeholder="00:00" aria-label="Start Time">
+                      <label for="floatingSelectGrid">시작 시각 ex) 00:00</label>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" placeholder="00:00" aria-label="End Time">
+                      <label for="floatingSelectGrid">종료 시각 ex) 00:00</label>
+                    </div>
+                  </div>
+                </div>
+            </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="Regist">등록</button>
+            <button type="button" class="btn btn-primary" id="Regist">수정</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">창닫기</button>
           </div>
         </div>

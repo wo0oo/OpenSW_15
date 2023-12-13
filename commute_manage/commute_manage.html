@@ -64,17 +64,17 @@
     
     let elapsedTimeIntervalRef;
     let startTime;
-    let stopTime;
+    let timeSTOP;
     let elapsedTime;
-    let timeST;
+    let timeSTART;
 
     function watchStart() {
         setStartTime();
-        timeST = new Date();
+        timeSTART = new Date();
 
-        let startHour = timeST.getHours();
-        let startMin = timeST.getMinutes();
-        let startSec = timeST.getSeconds();
+        let startHour = timeSTART.getHours();
+        let startMin = timeSTART.getMinutes();
+        let startSec = timeSTART.getSeconds();
 
         let startHourString = startHour<10?"0"+startHour:startHour;
         let startMinString = startMin<10?"0"+startMin:startMin;
@@ -105,11 +105,11 @@
             clearInterval(elapsedTimeIntervalRef);
             elapsedTimeIntervalRef = undefined;
         }
-        stopTime = new Date();
+        timeSTOP = new Date();
 
-        let stopHour = stopTime.getHours();
-        let stopMin = stopTime.getMinutes();
-        let stopSec = stopTime.getSeconds();
+        let stopHour = timeSTOP.getHours();
+        let stopMin = timeSTOP.getMinutes();
+        let stopSec = timeSTOP.getSeconds();
 
         let stopHourString = stopHour<10?"0"+stopHour:stopHour;
         let stopMinString = stopMin<10?"0"+stopMin:stopMin;
