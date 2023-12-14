@@ -60,7 +60,7 @@
                 return;
               }
               localStorage.setItem("commute_flag", "1");
-              inTime = returnTime();
+              localStorage.setItem("inTime", returnTime());
             }
           },
           myClockout: {
@@ -77,8 +77,8 @@
               }
               localStorage.setItem("commute_flag", "0");
               outTime = returnTime();
-              //   console.log(JSON.parse(sessionStorage.getItem("date_arr")));
-              commute_insert(inTime, outTime, JSON.parse(sessionStorage.getItem("date_arr")));
+              commute_insert(localStorage.getItem("inTime"), outTime, JSON.parse(sessionStorage.getItem("date_arr")));
+              localStorage.clear();
             },
           }
         },
