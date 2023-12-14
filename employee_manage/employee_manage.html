@@ -5,6 +5,16 @@
 row{
   margin-top: 20%;
 }
+#regist{
+  margin-top:10px;
+  margin-left: 45%;
+  margin-right: 45%;
+}
+#fix{
+  margin-top:10px;
+  margin-left: 45%;
+  margin-right: 45%;
+}
 </style>
 
 <html lang="en">
@@ -24,6 +34,15 @@ row{
                       <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
                     </ul>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-diagram-3"></i>직원 관리(모달)</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#RegModal">직원 등록</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#FixModal">직원 관리</a></li>
+                      </ul>
+                    </li>
+                      <li><a href="employee_manage.html"><i class="bi bi-diagram-3"></i> 직원 관리(Html)</a></li>
             </ul>
             <a id="pull" href="#"></a>
         </nav>
@@ -41,7 +60,6 @@ row{
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#RegModal" id="regist">
       직원 등록
     </button>
-
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FixModal" id="fix">
       직원 관리
     </button>
