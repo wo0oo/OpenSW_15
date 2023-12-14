@@ -406,7 +406,9 @@
 
               // 여기에서 data 객체를 활용합니다.
               console.log(data); // 전체 데이터 출력
-              sessionStorage.setItem("userId", data.userinform.employId);
+              
+            
+              Storage.setItem("userId", data.userinform.employId);
               sessionStorage.setItem("userName", data.userinform.username);
               sessionStorage.setItem(
                 "phoneNumber",
