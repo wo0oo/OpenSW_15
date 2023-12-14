@@ -2,58 +2,90 @@
 <link rel="stylesheet" href="top_bar.css">
 
 <style>
-  .container{
-    text-align : center;
-    display:table;
+  .container {
+    text-align: center;
+    display: table;
   }
 
-  #start-time{
-    display:table;
+  #start-time {
+    display: table;
   }
 </style>
 
 <html lang="en">
-  <header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
-    <div class="menu">
-        <nav class="clearfix">
-            <ul class="clearfix">
-                <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
-                <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
-                <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
-                <li><a href=""><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
-                      <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
-                    </ul>
-                  </li>
-            </ul>
-            <a id="pull" href="#"></a>
-        </nav>
-    </div>
+<header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+  <div class="menu">
+    <nav class="clearfix">
+      <ul class="clearfix">
+        <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+        <li><a href="board_page.html"><i class="bi bi-clipboard"></i> 게시판</a></li>
+        <li><a href="commute_manage.html"><i class="bi bi-clipboard"></i> 출퇴근 등록</a></li>
+        <li><a href="schedule.html"><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
+            <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
+          </ul>
+        </li>
+        <li><a href="my_page.html"><i class="bi bi-tag"></i> My 페이지</a> </li>
+      </ul>
+      <a id="pull" href="#"></a>
+    </nav>
+  </div>
 
 </header>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>출퇴근 등록</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  </head>
-  <body>
-    <div class="container">
-        <p class="start-time" id="start">출근 시간 : 00:00:00</p>
-        <p class="elapsed-time-text" id="due">00h 00m 00s</p>
-        <p class="stop-time" id="stop">퇴근 시간 : 00:00:00<br/></p>
-        <div class="buttons-container">
-            <button type="button" id="start-button" onclick="watchStart()">출근</button>
-            <button type="button" id="stop-button" onclick="watchStop()">퇴근</button>
-            <button type="button" id="reset-button" onclick="watchRst()">리셋</button>
-        </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>출퇴근 등록</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <script src='./commute.js'></script>
+</head>
+
+<body>
+  <div class="container">
+    <p class="start-time" id="start">출근 시간 : 00:00:00</p>
+    <p class="elapsed-time-text" id="due">00h 00m 00s</p>
+    <p class="stop-time" id="stop">퇴근 시간 : 00:00:00<br /></p>
+    <div class="buttons-container">
+      <button type="button" id="start-button" onclick="watchStart()">출근</button>
+      <button type="button" id="stop-button" onclick="watchStop()">퇴근</button>
+      <button type="button" id="reset-button" onclick="watchRst()">리셋</button>
     </div>
-    <script>
+  </div>
+  <script>
+    function returnTime() {
+      const now = new Date();
+
+      let Ycur = now.getFullYear();
+      let Mcur = ("0" + (now.getMonth() + 1)).slice(-2);
+      let Dcur = ("0" + (now.getDate())).slice(-2);
+      let curHour = ("0" + (now.getHours())).slice(-2);
+      let curMinute = ("0" + (now.getMinutes())).slice(-2);
+      let returnTime = Ycur + "-" + Mcur + "-" + Dcur + " / " + curHour + ":" + curMinute;
+
+      return returnTime;
+    }
+
+    function returnTimeforDB() {
+      const now = new Date();
+
+      let Ycur = now.getFullYear();
+      let Mcur = ("0" + (now.getMonth() + 1)).slice(-2);
+      let Dcur = ("0" + (now.getDate())).slice(-2);
+      let curHour = ("0" + (now.getHours())).slice(-2);
+      let curMinute = ("0" + (now.getMinutes())).slice(-2);
+      let returnTime = Ycur + "-" + Mcur + "-" + Dcur + "-" + curHour + "-" + curMinute;
+
+      return returnTime;
+    }
+
+
     const startButton = document.getElementById("start-button");
     const stopButton = document.getElementById("stop-button");
     const resetButton = document.getElementById("reset-button");
@@ -61,123 +93,146 @@
     const totlaTimetext = document.getElementsByClassName("total-time-text")[0];
     const stTime = document.getElementsByClassName("start-time")[0];
     const spTime = document.getElementsByClassName("stop-time")[0];
-    
+
     let elapsedTimeIntervalRef;
     let startTime;
     let timeSTOP;
     let elapsedTime;
     let timeSTART;
-
+    let inTime;
+    let outTime;
     function watchStart() {
-        setStartTime();
-        timeSTART = new Date();
+      setStartTime();
+      timeSTART = new Date();
 
-        let startHour = timeSTART.getHours();
-        let startMin = timeSTART.getMinutes();
-        let startSec = timeSTART.getSeconds();
+      let startHour = timeSTART.getHours();
+      let startMin = timeSTART.getMinutes();
+      let startSec = timeSTART.getSeconds();
 
-        let startHourString = startHour<10?"0"+startHour:startHour;
-        let startMinString = startMin<10?"0"+startMin:startMin;
-        let startSecString = startSec<10?"0"+startSec:startSec;
+      let startHourString = startHour < 10 ? "0" + startHour : startHour;
+      let startMinString = startMin < 10 ? "0" + startMin : startMin;
+      let startSecString = startSec < 10 ? "0" + startSec : startSec;
 
-        stTime.innerText = "출근 시간 : "+startHourString + ":"+startMinString+":"+startSecString;
-    
-        elapsedTimeIntervalRef = setInterval(() => {
-            elapsedTimeText.innerText = timeAndDateHandling.getElapsedTime(startTime);
-        }, 1000);
+
+
+      stTime.innerText = "출근 시간 : " + returnTime();
+
+      if (localStorage.getItem("commute_flag") === "1") {
+        alert("이미 출근상태입니다.");
+        return;
+      }
+      localStorage.setItem("commute_flag", "1");
+      localStorage.setItem("inTime", returnTimeforDB());
+      inTime = returnTimeforDB();
+
+      elapsedTimeIntervalRef = setInterval(() => {
+        elapsedTimeText.innerText = timeAndDateHandling.getElapsedTime(startTime);
+      }, 1000);
     }
-    
-    
+
+
     function setStartTime() {
-        if (elapsedTime) {
-            startTime = new Date();
-    
-            startTime.setHours(startTime.getHours() - elapsedTime.hours);
-            startTime.setMinutes(startTime.getMinutes() - elapsedTime.minutes);
-            startTime.setSeconds(startTime.getSeconds() - elapsedTime.seconds);
-        } else {
-            startTime = new Date();
-        }
+      if (elapsedTime) {
+        startTime = new Date();
+
+        startTime.setHours(startTime.getHours() - elapsedTime.hours);
+        startTime.setMinutes(startTime.getMinutes() - elapsedTime.minutes);
+        startTime.setSeconds(startTime.getSeconds() - elapsedTime.seconds);
+      } else {
+        startTime = new Date();
+      }
     }
-    
+
     function watchStop() {
-        if (typeof elapsedTimeIntervalRef !== "undefined") {
-            clearInterval(elapsedTimeIntervalRef);
-            elapsedTimeIntervalRef = undefined;
-        }
-        timeSTOP = new Date();
+      if (typeof elapsedTimeIntervalRef !== "undefined") {
+        clearInterval(elapsedTimeIntervalRef);
+        elapsedTimeIntervalRef = undefined;
+      }
+      timeSTOP = new Date();
 
-        let stopHour = timeSTOP.getHours();
-        let stopMin = timeSTOP.getMinutes();
-        let stopSec = timeSTOP.getSeconds();
+      let stopHour = timeSTOP.getHours();
+      let stopMin = timeSTOP.getMinutes();
+      let stopSec = timeSTOP.getSeconds();
 
-        let stopHourString = stopHour<10?"0"+stopHour:stopHour;
-        let stopMinString = stopMin<10?"0"+stopMin:stopMin;
-        let stopSecString = stopSec<10?"0"+stopSec:stopSec;
+      let stopHourString = stopHour < 10 ? "0" + stopHour : stopHour;
+      let stopMinString = stopMin < 10 ? "0" + stopMin : stopMin;
+      let stopSecString = stopSec < 10 ? "0" + stopSec : stopSec;
 
-        spTime.innerText = "퇴근 시간 : "+stopHourString + ":"+stopMinString+":"+stopSecString;
-        storeElapsedTimeOnPause();
+      spTime.innerText = "퇴근 시간 : " + returnTime();
+      if (localStorage.getItem("commute_flag") !== "1") {
+        alert("아직 출근하지 않았습니다.");
+        return;
+      }
+      localStorage.setItem("commute_flag", "0");
+      outTime = returnTimeforDB();
+      console.log(inTime, outTime);
+      commute_insert(localStorage.getItem("inTime"), outTime, JSON.parse(sessionStorage.getItem("date_arr")));
+      localStorage.clear();
+      storeElapsedTimeOnPause();
     }
-    
+
     function storeElapsedTimeOnPause() {
-        const brokenDownElapsedTime = elapsedTimeText.innerText.split(":");
-    
-        const brokenDownElapsedTimeAsNumbers = brokenDownElapsedTime.map(numberAsString => parseInt(numberAsString));
-    
-        elapsedTime = {
-            hours: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[0] : 0,
-            minutes: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[1] : brokenDownElapsedTimeAsNumbers[0],
-            seconds: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[2] : brokenDownElapsedTimeAsNumbers[1]
-        }
+      const brokenDownElapsedTime = elapsedTimeText.innerText.split(":");
+
+      const brokenDownElapsedTimeAsNumbers = brokenDownElapsedTime.map(numberAsString => parseInt(numberAsString));
+
+      elapsedTime = {
+        hours: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[0] : 0,
+        minutes: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[1] : brokenDownElapsedTimeAsNumbers[0],
+        seconds: brokenDownElapsedTimeAsNumbers.length === 3 ? brokenDownElapsedTimeAsNumbers[2] : brokenDownElapsedTimeAsNumbers[1]
+      }
     }
-    
+
     function watchRst() {
-        if (typeof elapsedTimeIntervalRef !== "undefined") {
-            clearInterval(elapsedTimeIntervalRef);
-            elapsedTimeIntervalRef = undefined;
-        }
-    
-        elapsedTime = undefined
+      if (typeof elapsedTimeIntervalRef !== "undefined") {
+        clearInterval(elapsedTimeIntervalRef);
+        elapsedTimeIntervalRef = undefined;
+      }
 
-        elapsedTimeText.innerText = "00h 00m 00s";
-        stTime.innerText = "출근 시간 : 00:00:00";
-        spTime.innerText = "퇴근 시간 : 00:00:00";
+      elapsedTime = undefined
+
+      elapsedTimeText.innerText = "00h 00m 00s";
+      stTime.innerText = "출근 시간 : 00:00:00";
+      spTime.innerText = "퇴근 시간 : 00:00:00";
     }
-    
+
     const timeAndDateHandling = {
-        getElapsedTime: function (startTime) {
-    
-            let endTime = new Date();
-            
-            let timeDiff = endTime.getTime() - startTime.getTime();
-    
-            timeDiff = timeDiff / 1000;
-    
-            let seconds = Math.floor(timeDiff % 60);
-            let secondsAsString = seconds < 10 ? "0" + seconds : seconds + "";
-    
-            timeDiff = Math.floor(timeDiff / 60);
-    
-            let minutes = timeDiff % 60;
-            let minutesAsString = minutes < 10 ? "0" + minutes : minutes + "";
-    
-            timeDiff = Math.floor(timeDiff / 60);
-    
-            let hours = timeDiff % 24;
-    
-            timeDiff = Math.floor(timeDiff / 24);
-    
-            let days = timeDiff;
-    
-            let totalHours = hours + (days * 24); // add days to hours
-            let totalHoursAsString = totalHours < 10 ? "0" + totalHours : totalHours + "";
-    
+      getElapsedTime: function (startTime) {
 
-            return totalHoursAsString + "h " + minutesAsString + "m " + secondsAsString+"s";
-        }
+        let endTime = new Date();
+
+        let timeDiff = endTime.getTime() - startTime.getTime();
+
+        timeDiff = timeDiff / 1000;
+
+        let seconds = Math.floor(timeDiff % 60);
+        let secondsAsString = seconds < 10 ? "0" + seconds : seconds + "";
+
+        timeDiff = Math.floor(timeDiff / 60);
+
+        let minutes = timeDiff % 60;
+        let minutesAsString = minutes < 10 ? "0" + minutes : minutes + "";
+
+        timeDiff = Math.floor(timeDiff / 60);
+
+        let hours = timeDiff % 24;
+
+        timeDiff = Math.floor(timeDiff / 24);
+
+        let days = timeDiff;
+
+        let totalHours = hours + (days * 24); // add days to hours
+        let totalHoursAsString = totalHours < 10 ? "0" + totalHours : totalHours + "";
+
+
+        return totalHoursAsString + "h " + minutesAsString + "m " + secondsAsString + "s";
+      }
     }
-    
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

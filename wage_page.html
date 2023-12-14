@@ -1,0 +1,481 @@
+<link rel="stylesheet" href="top_bar.css">
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" /> -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+    <title>OSS_15</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <style>
+        #date-select-btn,
+        #month-select-btn {
+            width: 20%;
+            font-size: 15px;
+        }
+
+        td {
+            width: 90px;
+            height: 70px;
+        }
+ 
+        .Calendar {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .Calendar>thead>tr:first-child>td {
+            font-weight: bold;
+        }
+
+        .Calendar>thead>tr:last-child>td {
+            background-color: gray;
+            color: white;
+        }
+
+        .pastDay {
+            background-color: lightgray;
+        }
+
+        .today {
+            background-color: #FFCA64;
+            cursor: pointer;
+        }
+
+        .futureDay {
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .futureDay.choiceDay,
+        .today.choiceDay {
+            background-color: #3E85EF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        div.left {
+
+            margin-left: 200px;
+            margin-top: 50px;
+
+        }
+
+        div.right {
+            margin-right: 250px;
+            margin-left: 100px;
+            margin-top: 50px;
+
+        }
+
+
+
+        .jbtext {
+            padding: 15px 20px;
+            background-color: #444444;
+            border-radius: 5px;
+            color: #ffffff;
+            display: none;
+            position: absolute;
+        }
+
+        ._date_:hover .jbtext {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<!-- 상단바 -->
+<header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+    <div class="menu">
+        <nav class="clearfix">
+            <ul class="clearfix">
+                <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+                <li><a href="board_page.html"><i class="bi bi-clipboard"></i> 게시판</a></li>
+                <li><a href="commute_manage.html"><i class="bi bi-clipboard"></i> 출퇴근 등록</a></li>
+                <li><a href="schedule.html"><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
+                        <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
+                    </ul>
+                </li>
+                <li><a href="my_page.html"><i class="bi bi-tag"></i> My 페이지</a> </li>
+            </ul>
+            <a id="pull" href="#"></a>
+        </nav>
+    </div>
+</header>
+
+
+
+<body>
+    <!--본문-->
+    <!-- 일별로보기 -->
+    <div class="d-flex ">
+        <div class=" left">
+            <div class="mx-auto bg-body-tertiary" style="height:40px; width:500px;">
+                <span class="mb-0 " style="font-size:20px">
+                    <i class="bi bi-calendar-date"></i>일별로 보기
+                </span>
+
+            </div>
+            <div class="mx-auto d-flex mb-2 mt-2 " style="width:500px;">
+                <input type="date" class=" form-control me-2 " id="selectDate">
+                <button type="button" id="date-select-btn" class="btn btn-primary me-2"
+                    style="background-color: #FF8000; border-color:#FF8000">선택</button>
+            </div>
+            <div class="d-flex">
+                <!--정보 보여주는곳-->
+                <div class="flex-grow-1 rounded-2 p-2 m-1 w-100">
+                    <div id="info-list">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 월별로보기 -->
+        <div class="right">
+            <div class="mx-auto bg-body-tertiary" style="height:40px; width:500px;">
+                <span class="mb-0" style="font-size:20px">
+                    <i class="bi bi-calendar-month"></i>월별로 보기
+                </span>
+
+            </div>
+            <div class="mx-auto d-flex mb-2 mt-2 " style="width:500px;">
+                <input type="month" class=" form-control me-2 " id="selectMonth">
+                <button type="button" id="month-select-btn" class="btn btn-primary me-2"
+                    style="background-color: #FF8000; border-color:#FF8000">선택</button>
+            </div>
+            <table class="Calendar ">
+                <thead>
+                    <tr>
+                        <td colspan="7">
+                            <span id="calYear"></span>년
+                            <span id="calMonth"></span>월
+                            <span id="sumWage"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>일</td>
+                        <td>월</td>
+                        <td>화</td>
+                        <td>수</td>
+                        <td>목</td>
+                        <td>금</td>
+                        <td>토</td>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        /*  <유저의 정보 저장 예시>
+        user_info 객체에 직원에 대한 다음과 같은 정보가 담겨있다: {시급, 날짜를 담는 배열}
+        시간에 대한 배열은 다음과 같은 형식이다. start는 출근 날짜 및 시간, end는 퇴근 날짜 및 시간이다.:
+            let array=[
+                {start: Date(년, 월, 일, 시, 분, 초, 밀리초), end: Date(년, 월, 일, 시, 분, 초, 밀리초)},
+                {start: Date(년, 월, 일, 시, 분, 초, 밀리초), end: Date(년, 월, 일, 시, 분, 초, 밀리초)},
+                {start: Date(년, 월, 일, 시, 분, 초, 밀리초), end: Date(년, 월, 일, 시, 분, 초, 밀리초)},
+                . ,
+                . ,
+                .
+                {start: Date(년, 월, 일, 시, 분, 초, 밀리초), end: Date(년, 월, 일, 시, 분, 초, 밀리초)},
+            ]
+        예를 들어, 2023-11-15에 16:00부터 23:00까지 일을 하면
+        user_info.array에 다음과 같은 객체가 추가된다: {start: Date(2023,10,15,16,0,0,0), end: Date(2023,10,15,23,0,0,0)}
+        Date객체의 파라미터는 쉼표를 기준으로 년, 월, 일, 시, 분, 초, 밀리초이다.
+         ***주의*** Date 객체는 달이 1~12가 아닌 0~11.
+        또한, array 안의 객체는 날짜순으로 정렬한다.
+        */
+        let user_info = {
+            hourly_wage: 10000
+        };
+
+        // DB의 데이터 불러와서 user_info에 삽입
+        let user_array = JSON.parse(sessionStorage.getItem("date_arr"));
+        console.log(Array.isArray(user_array));
+        user_array.forEach((i) => {
+            i.start = StringToDate(i.start);
+            i.end = StringToDate(i.end);
+        });
+
+        user_info.array = user_array;
+
+
+        //날짜 순으로 정렬
+        user_info.array.sort((a, b) => a.start - b.start);
+
+        // "YYYY-MM-DD-hh-mm"로 저장된 데이터를 Date 객체로 변환하는 함수
+        function StringToDate(str) {
+            let __year = parseInt(str.slice(0, 4));
+            let __month = parseInt(str.slice(5, 7));
+            let __date = parseInt(str.slice(8, 10));
+            let __hour = parseInt(str.slice(11, 13));
+            let __minute = parseInt(str.slice(14, 17));
+            let DDate = new Date(__year, __month - 1, __date, __hour, __minute, 0, 0);
+            return DDate;
+        }
+
+        // 야간수당 안 붙은 급여 계산
+        function wage_check(obj, _hourly_wage) {
+            return (obj.end - obj.start) / 3600000 * _hourly_wage;  // Date끼리의 차가 밀리초로 반환되기 때문에  3600000으로 나눠야함.
+        }
+
+        // 야간수당 계산
+        function night_check(obj, _hourly_wage) {
+            let cur_0 = new Date(obj.start.getFullYear(), obj.start.getMonth(), obj.start.getDate(), 0, 0, 0, 0); // 당일 0시
+            let cur_6 = new Date(obj.start.getFullYear(), obj.start.getMonth(), obj.start.getDate(), 6, 0, 0, 0); // 당일 6시
+            let cur_22 = new Date(obj.start.getFullYear(), obj.start.getMonth(), obj.start.getDate(), 22, 0, 0, 0); // 당일 22시 
+            let next_6 = new Date(obj.start.getFullYear(), obj.start.getMonth(), obj.start.getDate() + 1, 6, 0, 0, 0); // 다음날 6시
+
+            if (cur_22 < obj.start && obj.start < next_6 && next_6 < obj.end) { //1. 22시 < 출근시간 < 다음날 6시 < 퇴근시간
+                return (next_6 - obj.start) / 3600000 * (_hourly_wage / 2);
+            }
+            else if (obj.start < cur_22 && cur_22 < obj.end && obj.end < next_6) { //2. 출근시간 < 22시 < 퇴근시간 < 다음날 6시
+                return (obj.end - cur_22) / 3600000 * (_hourly_wage / 2);
+            }
+            else if (cur_22 < obj.start && obj.start < obj.end && obj.end < next_6) { //3. 22시 < 출근시간 < 퇴근시간 < 다음날 6시
+                return (obj.end - obj.start) / 3600000 * (_hourly_wage / 2);
+            }
+            else if (cur_0 < obj.start && obj.start << obj.end && obj.end < cur_6) { //4. 0시 < 출근시간< 퇴근시간<6시
+                return (obj.end - obj.start) / 3600000 * (_hourly_wage / 2);
+            }
+            else if (cur_0 < obj.start && obj.start < cur_6 && cur_6 < obj.end) { //5. 0시 < 출근시간 < 6시 < 퇴근시간
+                return (cur_6 - obj.start) / 3600000 * (_hourly_wage / 2);
+            }
+            else return 0; //야간수당 발생 X
+        }
+
+        //날짜 비교
+        function compare_time(users_start, _Date) {
+            let flag = true;
+            // Date 객체는 달이 0~11이기 때문에 01 해줘야함.
+            let n = parseInt(_Date.substr(5, 2));
+            n--;
+
+            if (users_start.getFullYear() !== parseInt(_Date.substr(0, 4))) flag = false;
+            if (users_start.getMonth() !== parseInt(n.toString())) flag = false;
+            if (users_start.getDate() !== parseInt(_Date.substr(8, 2))) flag = false;
+            return flag;
+        }
+
+        let selectDateBtn = document.querySelector("#date-select-btn");
+        let selectMonthBtn = document.querySelector("#month-select-btn");
+
+        // '일별로 보기'에서 선택 버튼 눌렀을 때
+        selectDateBtn.addEventListener("click", () => {
+            //날짜 정보 불러옴
+            let DateInput = document.querySelector("#selectDate");
+            let _Date = DateInput.value;
+            let daily_wage = 0;
+            let night_wage = 0;
+
+            // 날짜 선택 안 했을 때
+            if (_Date === "") {
+                alert("날짜를 선택해주세요."); return;
+            }
+
+            for (let i = 0; i < user_info.array.length; i++) {
+                if (compare_time(user_info.array[i].start, _Date)) {
+                    daily_wage = Math.floor(wage_check(user_info.array[i], user_info.hourly_wage));
+                    night_wage = Math.floor(night_check(user_info.array[i], user_info.hourly_wage));
+                    break;
+                }
+            }
+            /*정보 append*/
+
+            let div = document.createElement("div");
+            div.className = "wage p-1 rounded-2 ps-2 d-flex align-items-center my-1 ";
+            div.style = "width:400px; "
+
+            //날짜 텍스트 append
+            let date_span = document.createElement("span");
+            date_span.classList.add("me-4");
+            date_span.textContent = _Date + "  |";
+            div.appendChild(date_span);
+            //급여 텍스트 append
+            let wage_span = document.createElement("span");
+            wage_span.textContent = "급여: " + (daily_wage + night_wage) + " / 야간수당: " + (night_wage);
+            div.appendChild(wage_span);
+
+            //삭제 버튼 append
+            let buttonRemove = document.createElement("button");
+            buttonRemove.classList.add("btn", "btn-sm", "btn-Light");
+            //buttonRemove.style.
+            let iElem = document.createElement("i");
+            iElem.classList.add("bi", "bi-x");
+            buttonRemove.appendChild(iElem);
+            div.appendChild(buttonRemove);
+
+            //remove button click
+            buttonRemove.addEventListener("click", () => {
+                div.remove();
+
+            });
+
+            //정보 append
+            let list = document.querySelector("#info-list");
+            list.appendChild(div);
+
+        });
+
+        // '월별로 보기'에서 선택 버튼 눌렀을 때
+        selectMonthBtn.addEventListener("click", () => {
+            let MonthInput = document.querySelector("#selectMonth");
+            let _Date = MonthInput.value;
+            // 날짜 선택 안 했을 때
+            if (_Date === "") {
+                alert("날짜를 선택해주세요."); return;
+            }
+            let month = new Date(parseInt(_Date.substr(0, 4)), parseInt(_Date.substr(5, 2)) - 1, 1);
+            buildCalendar(month, user_info);
+        });
+    </script>
+
+    <!-- 달력 작성 -->
+    <script>
+        // 한자리수에 0 붙이기
+        function leftPad(value) {
+            if (value < 10) {
+                value = "0" + value;
+                return value;
+            }
+            return value;
+        }
+        function buildCalendar(month, users_info) {
+            let firstDate = new Date(month.getFullYear(), month.getMonth(), 1);     // 이번달 1일
+            let lastDate = new Date(month.getFullYear(), month.getMonth() + 1, 0);  // 이번달 마지막날
+            let sum_wage = 0;
+            let tbody_Calendar = document.querySelector(".Calendar > tbody");
+            document.getElementById("calYear").innerText = month.getFullYear();             // 연도 숫자 갱신
+            document.getElementById("calMonth").innerText = leftPad(month.getMonth() + 1);  // 월 숫자 갱신
+
+            let Holiday_wage = 0; // 그 주의 주휴수당
+            let Holiday_wage_sum = 0; // 주휴수당 합계
+
+            while (tbody_Calendar.rows.length > 0) {                        // 이전 출력결과가 남아있는 경우 초기화
+                tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
+            }
+
+            let nowRow = tbody_Calendar.insertRow();        // 첫번째 행 추가          
+
+            for (let j = 0; j < firstDate.getDay(); j++) {  // 이번달 1일의 요일만큼
+                let nowColumn = nowRow.insertCell();        // 열 추가
+            }
+
+            for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {   // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복  
+                Holiday_wage = 0;
+                if (nowDay.getDay() == 6) {
+                    let Holiday = new Date(nowDay.getFullYear(), nowDay.getMonth(), nowDay.getDate() - 6, 0, 0, 0, 0); // 주휴수당 체크하기 위해 일요일부터 시작
+                    let time_sum = 0; // 일주일에 얼마나 일했는지 누적하기 위한 변수
+                    for (let cur = Holiday; cur <= nowDay; cur.setDate(cur.getDate() + 1)) {
+                        let string_cur = cur.getFullYear().toString() + "-" + leftPad((cur.getMonth() + 1).toString()) + "-" + leftPad(cur.getDate().toString());
+                        //근무를 했었는지 확인 후 시간 추가
+                        for (let i = 0; i < users_info.array.length; i++) {
+                            if (compare_time(users_info.array[i].start, string_cur)) {
+                                time_sum += (users_info.array[i].end - users_info.array[i].start) / 3600000;
+                            }
+                        }
+                    }
+                    if (time_sum >= 15) {
+                        Holiday_wage = (time_sum / 5) * users_info.hourly_wage;
+                        Holiday_wage_sum += (time_sum / 5) * users_info.hourly_wage;
+                    }
+                }
+
+
+
+                let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
+                nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
+                nowColumn.className = "_date_";
+
+                // nowDay.getMonth() + 1 하는 이유 -> 날짜 비교 함수에서 달에 -1 하기때문에
+                let string_nowday = nowDay.getFullYear().toString() + "-" + leftPad((nowDay.getMonth() + 1).toString()) + "-" + leftPad(nowDay.getDate().toString());
+
+                //급여 있는지 확인
+                for (let i = 0; i < users_info.array.length; i++) {
+                    if (compare_time(users_info.array[i].start, string_nowday)) {
+                        daily_wage = Math.floor(wage_check(users_info.array[i], users_info.hourly_wage)); // 야간수당 포함 안 된 급여
+                        night_wage = Math.floor(night_check(users_info.array[i], user_info.hourly_wage)); // 야간수당
+                        sum_wage += daily_wage;
+                        sum_wage += night_wage;
+                        if (Holiday_wage !== 0) { //주휴수당 발생한 경우
+                            nowColumn.innerText = leftPad(nowDay.getDate()) + "\n" + (daily_wage + night_wage).toString() + "원\n" + (Math.floor(Holiday_wage)).toString() + "원";      // 추가한 열에 날짜 + 급여 + 주휴수당 입력
+                        }
+                        else { //주휴수당 발생하지 않은 경우
+                            nowColumn.innerText = leftPad(nowDay.getDate()) + "\n" + (daily_wage + night_wage).toString() + "원";      // 추가한 열에 날짜 + 급여 입력
+
+                        }
+                        nowColumn.style.backgroundColor = "#CEF6D8"; // 근무한 날 표시(연두색)
+                        if (Holiday_wage !== 0) nowColumn.style.backgroundColor = "#A9F5D0";
+                        //호버링 했을때 보여줄 상세정보 추가
+                        let div = document.createElement("div");
+                        div.className = "jbtext";
+                        //text append
+                        let span = document.createElement("span");
+                        span.classList.add("me-auto");
+                        span.textContent = "총 급여: " + (daily_wage + night_wage + Math.floor(Holiday_wage)).toString() + "원 / 야간 수당: " + night_wage.toString() + "원 / 주휴 수당: " + (Math.floor(Holiday_wage)).toString() + "원";
+                        div.appendChild(span);
+                        //append text div
+                        nowColumn.appendChild(div);
+                        break;
+                    }
+                    else { //근무는 안 했지만 토요일에 주휴 발생하는 상황 -> 주휴수당은 표시 해줘야함
+                        if (Holiday_wage !== 0) {
+                            nowColumn.style.backgroundColor = "#A9F5D0";
+                            nowColumn.innerText = leftPad(nowDay.getDate()) + "\n\n" + (Math.floor(Holiday_wage)).toString() + "원";      //  주휴수당 입력
+                            //호버링 했을때 보여줄 상세정보 추가
+                            let div = document.createElement("div");
+                            div.className = "jbtext";
+                            //text append
+                            let span = document.createElement("span");
+                            span.classList.add("me-auto");
+                            span.textContent = "주휴 수당: " + (Math.floor(Holiday_wage)).toString() + "원";
+                            div.appendChild(span);
+                            //append text div
+                            nowColumn.appendChild(div);
+                        }
+                    }
+                }
+
+                if (nowDay.getDay() == 0) {                 // 일요일인 경우 글자색 빨강으로
+                    nowColumn.style.color = "#DC143C";
+                }
+                if (nowDay.getDay() == 6) {                 // 토요일인 경우 글자색 파랑으로 하고
+                    nowColumn.style.color = "#0000CD";
+                    nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
+                }
+
+            }
+            document.getElementById("sumWage").innerText = "/ " + Math.floor((sum_wage + Holiday_wage_sum).toString()) + "원";  // 월급 텍스트
+
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

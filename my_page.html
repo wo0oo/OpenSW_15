@@ -1,0 +1,244 @@
+<link rel="stylesheet" href="top_bar.css" />
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OSS_15</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"  
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+</head>
+
+<header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color: #f6f6f6">
+  <div class="menu">
+    <nav class="clearfix">
+      <ul class="clearfix">
+        <ul class="clearfix ">
+          <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+          <li><a href="board_page.html"><i class="bi bi-clipboard"></i> 게시판</a></li>
+          <li><a href="commute_manage.html"><i class="bi bi-clipboard"></i> 출퇴근 등록</a></li>
+          <li><a href="schedule.html"><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
+              <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
+            </ul>
+          </li>
+          <li><a href="my_page.html"><i class="bi bi-tag"></i> My 페이지</a> </li>
+        </ul>
+
+      </ul>
+      <a id="pull" href="#"></a>
+    </nav>
+  </div>
+</header>
+
+<body>
+  <!--상단바-->
+
+  <!--본문-->
+  <div class="container border p-3">
+    <div class="d-flex flex-row justify-content-between">
+      <h2 class="mb-3 fw-bold">개인정보수정</h2>
+      <button class="btn btn-danger fw-bold" id="logoutbutton">
+        로그아웃
+      </button>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">이름</span>
+          <input type="text" class="form-control fw-bold" id="userName" readonly />
+        </div>
+      </div>
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">아이디</span>
+          <input type="text" class="form-control fw-bold" id="userId" readonly />
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">생년월일</span>
+          <input type="text" class="form-control fw-bold" id="birthDay" readonly />
+        </div>
+      </div>
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">직급</span>
+          <input type="text" class="form-control fw-bold" id="adminKey" readonly />
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">휴대폰(변경가능)</span>
+          <input type="tel" class="form-control fw-bold" id="phoneNumber" />
+        </div>
+      </div>
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">시급(단위: 원)</span>
+          <input type="number" class="form-control fw-bold" id="wage" readonly />
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <h5 class="fw-bold">
+        비밀번호 변경 /
+        <span class="text-danger">비밀번호를 변경하고자 할 경우에만 입력하세요.</span>
+      </h5>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">신규 비밀번호</span>
+          <input type="password" class="form-control fw-bold" placeholder="신규 비밀번호를 입력하세요." id="newPassword_first" />
+        </div>
+      </div>
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">비밀번호 확인</span>
+          <input type="password" class="form-control fw-bold" placeholder="비밀번호 확인" id="newPassword_second" />
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <h5 class="fw-bold">정보 수정을 위해 이전 비밀번호를 입력하세요.</h5>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-3" style="width: 40%">
+        <div class="input-group">
+          <span class="input-group-text bg-light fw-bold" style="width: 40%">이전 비밀번호</span>
+          <input type="password" class="form-control fw-bold" placeholder="이전 비밀번호를 입력하세요." id="oldPassword" />
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center mb-3">
+      <button class="btn btn-primary fw-bold" id="modfiyButton">제출</button>
+    </div>
+  </div>
+
+  <style></style>
+
+  <script>
+    document.getElementById("userName").value =
+      sessionStorage.getItem("userName");
+    document.getElementById("userId").value =
+      sessionStorage.getItem("userId");
+    document.getElementById("birthDay").value =
+      sessionStorage.getItem("birthDay");
+    document.getElementById("phoneNumber").value =
+      sessionStorage.getItem("phoneNumber");
+
+    document.getElementById("wage").value = sessionStorage.getItem("wage");
+
+    const oldPhoneNumber = document.getElementById("phoneNumber").value;
+
+    if (sessionStorage.getItem("adminKey") === "1") {
+      document.getElementById("adminKey").value = "사장";
+    } else {
+      document.getElementById("adminKey").value = "직원";
+    }
+
+    const logoutbutton = document.getElementById("logoutbutton");
+    logoutbutton.addEventListener("click", () => {
+      sessionStorage.clear();
+      alert("로그아웃되었습니다.");
+      location.href = "login_page.html";
+    });
+
+    const userId = document.getElementById("userId");
+    const userName = document.getElementById("userName");
+    const birthDay = document.getElementById("birthDay");
+    const phoneNumber = document.getElementById("phoneNumber");
+    const wage = document.getElementById("wage");
+    const newPassword_first = document.getElementById("newPassword_first");
+    const newPassword_second = document.getElementById("newPassword_second");
+    const oldPassword = document.getElementById("oldPassword");
+
+    const modfiyButton = document.getElementById("modfiyButton");
+
+    modfiyButton.addEventListener("click", () => {
+      console.log(userId.value);
+      console.log(userName.value);
+      console.log(birthDay.value);
+      console.log(phoneNumber.value);
+      console.log(wage.value);
+
+      console.log(newPassword_first.value);
+      console.log(newPassword_second.value);
+      console.log(oldPassword.value);
+      console.log(oldPhoneNumber);
+
+      if (
+        phoneNumber.value === "" ||
+        newPassword_first.value === "" ||
+        newPassword_second.value === "" ||
+        oldPassword.value === ""
+      ) {
+        alert("입력하신 정보를 다시 확인하세요.");
+      } else if (newPassword_first.value !== newPassword_second.value) {
+        alert("신규 비밀번호가 일치하지 않습니다.");
+      } else {
+        fetch("http://localhost:8000/auth/modify", {
+          method: "POST", // or 'POST'
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+          body: JSON.stringify({
+            employId: userId.value,
+            password: oldPassword.value,
+            username: userName.value,
+            phoneNumber: oldPhoneNumber,
+            birthday: birthDay.value,
+            wage: wage.value,
+            newPassword: newPassword_second.value,
+            newPhoneNumber: phoneNumber.value,
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              // 2xx 응답 코드일 경우
+
+              alert("변경이 완료되었습니다.");
+              sessionStorage.clear();
+              location.href = "login_page.html";
+            } else {
+              // 2xx 응답 코드가 아닐 경우
+
+              alert("입력하신 정보를 다시 확인하세요");
+              console.log(res.json());
+            }
+          })
+
+          .catch((err) => {
+            console.error("Error:", err.response);
+            alert("서버 에러입니다. Error 정보 : " + err.response);
+          });
+      }
+    });
+  </script>
+</body>
+
+</html>
