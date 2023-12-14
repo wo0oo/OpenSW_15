@@ -132,6 +132,19 @@
             <input type="tel" class="form-control fw-bold" id="phoneNumber" />
           </div>
         </div>
+        <div class="col-3" style="width: 40%">
+          <div class="input-group">
+            <span class="input-group-text bg-light fw-bold" style="width: 40%"
+              >시급(단위: 원)</span
+            >
+            <input
+              type="number"
+              class="form-control fw-bold"
+              id="wage"
+              readonly
+            />
+          </div>
+        </div>
       </div>
 
       <div class="mb-3">
@@ -209,6 +222,8 @@
       document.getElementById("phoneNumber").value =
         sessionStorage.getItem("phoneNumber");
 
+      document.getElementById("wage").value = sessionStorage.getItem("wage");
+
       const oldPhoneNumber = document.getElementById("phoneNumber").value;
 
       if (sessionStorage.getItem("adminKey") === "1") {
@@ -228,6 +243,7 @@
       const userName = document.getElementById("userName");
       const birthDay = document.getElementById("birthDay");
       const phoneNumber = document.getElementById("phoneNumber");
+      const wage = document.getElementById("wage");
       const newPassword_first = document.getElementById("newPassword_first");
       const newPassword_second = document.getElementById("newPassword_second");
       const oldPassword = document.getElementById("oldPassword");
@@ -239,6 +255,7 @@
         console.log(userName.value);
         console.log(birthDay.value);
         console.log(phoneNumber.value);
+        console.log(wage.value);
 
         console.log(newPassword_first.value);
         console.log(newPassword_second.value);
@@ -268,6 +285,7 @@
               username: userName.value,
               phoneNumber: oldPhoneNumber,
               birthday: birthDay.value,
+              wage: wage.value,
               newPassword: newPassword_second.value,
               newPhoneNumber: phoneNumber.value,
             }),

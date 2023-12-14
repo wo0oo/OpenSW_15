@@ -1,1 +1,24 @@
-{"users":[{"id":1,"employId":"2018202065","password":"1234","username":"박철준","phoneNumber":"7777-7777-7777","birthday":"7777-07-17","adminkey":1},{"id":2,"employId":"2018202000","password":"1234","username":"김광운","phoneNumber":"010-9999-9999","birthday":"2222-02-02","adminkey":0}]}
+{
+  "users": [
+    {
+      "id": 1,
+      "employId": "2018202065",
+      "password": "123",
+      "username": "박철준",
+      "phoneNumber": "777-7777-7777",
+      "birthday": "7777-07-07",
+      "wage": "7777",
+      "adminkey": 1
+    },
+    {
+      "id": 2,
+      "employId": "2018202000",
+      "password": "1234",
+      "username": "김광운",
+      "phoneNumber": "999-9999-9999",
+      "birthday": "9999-09-09",
+      "wage": "9999",
+      "adminkey": 0
+    }
+  ]
+}

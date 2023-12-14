@@ -138,7 +138,7 @@ function isAuthenticated_for_login_modify({ employId, password }) {
 server.post("/auth/register", (req, res) => {
   console.log("register endpoint called; request body:");
   console.log(req.body);
-  var { employId, password, username, phoneNumber, birthday, adminkey } =
+  var { employId, password, username, phoneNumber, birthday, wage, adminkey } =
     req.body;
 
   if (
@@ -147,6 +147,7 @@ server.post("/auth/register", (req, res) => {
     password === "" ||
     username === "" ||
     phoneNumber === "" ||
+    wage === "" ||
     birthday === ""
   ) {
     const status = 401;
@@ -201,6 +202,7 @@ server.post("/auth/register", (req, res) => {
       username: username,
       phoneNumber: phoneNumber,
       birthday: birthday,
+      wage: wage,
       adminkey: adminkey,
     });
 
@@ -259,6 +261,7 @@ server.post("/auth/modify", (req, res) => {
     username,
     phoneNumber,
     birthday,
+    wage,
     newPassword,
     newPhoneNumber,
   } = req.body;
@@ -303,6 +306,7 @@ server.post("/auth/modify", (req, res) => {
     username,
     phoneNumber,
     birthday,
+    wage,
   });
 
   if (hittingdata === undefined) {
