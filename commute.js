@@ -17,6 +17,7 @@ function DatetoString(_date) {
 
 function commute_insert(inTime, outTime, _date_arr) {
   let obj = { start: inTime, end: outTime };
+  console.log(typeof (obj));
   _date_arr.push(obj);
   console.log(_date_arr[1]);
 

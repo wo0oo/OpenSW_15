@@ -110,6 +110,12 @@
             placeholder="생년월일을 입력하세요." />
         </div>
         <div class="d-flex justify-content-between mt-3">
+          <div class="w-25 ms-3 fw-bold">시급</div>
+          <input id="wageInput_register" class="w-75 border border-dark me-3 fw-bold" type="number"
+            placeholder="시급을 입력하세요 (단위: 원)" />
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
           <div class="w-25 ms-3 fw-bold">관리자권한</div>
           <input id="adminKeyInput_register" class="w-75 border border-dark me-3 fw-bold" type="number"
             placeholder="관리자 권한을 원하시면 인증키를 입력하세요." />
@@ -292,6 +298,7 @@
     const birthDay_register = document.getElementById(
       "birthDayInput_register"
     );
+    const wage_register = document.getElementById("wageInput_register");
     const adminKey_register = document.getElementById(
       "adminKeyInput_register"
     );
@@ -303,6 +310,7 @@
       console.log(userName_register.value);
       console.log(phoneNumber_register.value);
       console.log(birthDay_register.value);
+      console.log(wage_register.value);
       console.log(adminKey_register.value);
       if (
         userId_register.value === "" ||
@@ -310,6 +318,7 @@
         userName_register.value === "" ||
         phoneNumber_register.value === "" ||
         birthDay_register.value === "" ||
+        wage_register.value === "" ||
         adminKey_register.value === ""
       ) {
         alert("입력하신 정보를 다시 확인하세요.");
@@ -327,6 +336,7 @@
             username: userName_register.value,
             phoneNumber: phoneNumber_register.value,
             birthday: birthDay_register.value,
+            wage: wage_register.value,
             adminkey: adminKey_register.value,
             date_arr: [{}],
           }),
@@ -340,6 +350,7 @@
               userName_register.value = "";
               phoneNumber_register.value = "";
               birthDay_register.value = "";
+              wage_register.value = "";
               adminKey_register.value = "";
               alert("회원가입이 완료되었습니다.");
               registerModal.classList.add("hidden");
@@ -392,6 +403,7 @@
               userId_login.value = "";
               password_login.value = "";
               alert("로그인에 성공하였습니다.");
+
               // 여기에서 data 객체를 활용합니다.
               console.log(data); // 전체 데이터 출력
               sessionStorage.setItem("userId", data.userinform.employId);
@@ -401,6 +413,7 @@
                 data.userinform.phoneNumber
               );
               sessionStorage.setItem("birthDay", data.userinform.birthday);
+              sessionStorage.setItem("wage", data.userinform.wage);
               sessionStorage.setItem("adminKey", data.userinform.adminkey);
               sessionStorage.setItem("date_arr", JSON.stringify(data.userinform.date_arr));
               sessionStorage.setItem("token", data.access_token);
