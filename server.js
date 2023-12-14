@@ -204,6 +204,7 @@ server.post("/auth/register", (req, res) => {
       birthday: birthday,
       wage: wage,
       adminkey: adminkey,
+      date_arr: [{}],
     });
 
     //add some data
@@ -250,6 +251,79 @@ server.post("/auth/login", (req, res) => {
   const message = "Success login";
   res.status(200).json({ message, access_token, userinform }); //토큰 전송
 });
+
+
+// 출퇴근 등록
+server.post("/auth/commute_insert", (req, res) => {
+  const {
+    employId,
+    username,
+    phoneNumber,
+    birthday,
+    date_arr,
+  } = req.body;
+  console.log(date_arr);
+
+  const hittingdata = findhittingdata_for_modify({
+    //해당 정보를 DB에 매칭시켜 원하는 정보가져오기
+    employId,
+    username,
+    phoneNumber,
+    birthday,
+  });
+
+  if (hittingdata === undefined) {
+    //DB에서 원하는 정보를 가져올 수 없는 경우
+    const status = 401;
+
+    const message = "No exist imformation in DB";
+    res.status(status).json({ status, message });
+    return;
+  }
+
+  fs.readFile("./userDB.json", (err, data) => {
+    if (err) {
+      const status = 401;
+      const message = err;
+      res.status(status).json({ status, message });
+      return;
+    }
+
+    // Get current users data
+    var data = JSON.parse(data.toString());
+    const find_user_index = data.users.findIndex(
+      (data) => JSON.stringify(data) === JSON.stringify(hittingdata)
+    );
+
+    console.log(find_user_index);
+    // 수정하고자 하는 사용자 정보 변경
+
+
+    data.users[find_user_index].date_arr = date_arr;
+
+
+    //add some data
+    var writeData = fs.writeFileSync(
+      "./userDB.json",
+      JSON.stringify(data),
+      (err, result) => {
+        // WRITE
+        if (err) {
+          const status = 401;
+          const message = err;
+          res.status(status).json({ status, message });
+          return;
+        }
+      }
+    );
+
+    userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8")); //동기화
+    const message = "Success modifying user imformation";
+    res.status(200).json(message);
+  });
+});
+
+
 
 // DB정보를 수정하는 기능
 server.post("/auth/modify", (req, res) => {
@@ -307,6 +381,7 @@ server.post("/auth/modify", (req, res) => {
     phoneNumber,
     birthday,
     wage,
+    date_arr
   });
 
   if (hittingdata === undefined) {

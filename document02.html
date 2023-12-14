@@ -1,0 +1,75 @@
+<!doctype html>
+<link rel="stylesheet" href="top_bar.css">
+
+<style>
+  #y2023 {
+    font-size: 20px;
+    display: flex;
+  }
+</style>
+<html lang="en">
+<header topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" style="background-color:#F6F6F6">
+  <div class="menu">
+    <nav class="clearfix">
+      <ul class="clearfix">
+        <li><a href="main_page.html"><i class="bi bi-house-door"></i> 홈</a></li>
+        <li><a href="wage_page.html"><i class="bi bi-cash-coin"></i> 급여 확인</a></li>
+        <li><a href=""><i class="bi bi-clipboard"></i> 게시판</a></li>
+        <li><a href=""><i class="bi bi-calendar2-week"></i> 스케쥴 확인</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-file-earmark-text"></i> 서류 확인</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="document01.html">근로 계약서</a></li>
+            <li><a class="dropdown-item" href="document02.html">급여 명세서</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a id="pull" href="#"></a>
+    </nav>
+  </div>
+
+</header>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>급여 명세서 확인</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <li class="nav-item dropdown" id="y2023">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">2023</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#" id="JAN" onclick="Popup();">1월</a></li>
+      <li><a class="dropdown-item" href="#" id="FAB" onclick="Popup();">2월</a></li>
+      <li><a class="dropdown-item" href="#" id="MAR" onclick="Popup();">3월</a></li>
+      <li><a class="dropdown-item" href="#" id="APR" onclick="Popup();">4월</a></li>
+      <li><a class="dropdown-item" href="#" id="MAY" onclick="Popup();">5월</a></li>
+      <li><a class="dropdown-item" href="#" id="JUN" onclick="Popup();">6월</a></li>
+      <li><a class="dropdown-item" href="#" id="JUL" onclick="Popup();">7월</a></li>
+      <li><a class="dropdown-item" href="#" id="AUG" onclick="Popup();">8월</a></li>
+      <li><a class="dropdown-item" href="#" id="SEP" onclick="Popup();">9월</a></li>
+      <li><a class="dropdown-item" href="#" id="OCT" onclick="Popup();">10월</a></li>
+      <li><a class="dropdown-item"
+          href="https://drive.google.com/file/d/1O2JV4zVxoRTzldtoe9OjAd6wJ8WFh4jT/view?usp=drive_link" id="NOV"
+          download>11월</a></li>
+      <li><a class="dropdown-item" href="#" id="DEC" onclick="Popup();">12월</a></li>
+    </ul>
+  </li>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script>
+    function Popup() {
+      let popupX = (window.screen.width / 2) - 250;
+      let popupY = (window.screen.height / 2) - 100;
+      window.open("popup_txt.html", "a", "width=500, height=200, left=" + popupX + ", top=" + popupY);
+    }
+  </script>
+</body>
+
+</html>
